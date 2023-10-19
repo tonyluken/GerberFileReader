@@ -1,0 +1,25 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 4.10.4.7 - A Simple Cut-in*
+G04 Modified by Tony Luken to fix coordinates and demonstrate a region overlapping previous draws*
+
+%FSLAX26Y26*%
+%ADD10C,0.1*%
+G75*
+D10*
+X5000000Y11000000D02* G04 Add a draw that passes under the region*
+X11000000Y1000000D01*
+G36*
+X2000000Y10000000D02*
+G01*
+X12000000D01*
+Y2000000D01*
+X2000000D01*
+Y6000000D01*
+X5000000D01*
+G03*
+X5000000Y6000000I3000000J0D01*
+G01*
+X2000000D01*
+Y10000000D01*
+G37*
+M02*

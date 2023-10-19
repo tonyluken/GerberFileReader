@@ -1,0 +1,52 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 4.10.4.6 - Using Polarity to Create Holes*
+G04 Modified by Tony Luken to test Aperture Attributes*
+
+G04 This file illustrates how to use polarity to create holes*
+%FSLAX25Y25*%
+%MOMM*%
+G01*
+G04 First object: big square - dark polarity*
+%TA.AperFunction,ComponentPad*%
+%TAMyApertureAttributeWithValue,value*%
+%TAMyApertureAttributeWithoutValue*%
+%LPD*%
+G36*
+X2500000Y2500000D02*
+X17500000D01*
+Y17500000D01*
+X2500000D01*
+Y2500000D01*
+G37*
+%TD*%
+G04 Second object: big circle - clear polarity*
+%LPC*%
+G36*
+G75*
+X5000000Y10000000D02*
+G03*
+X5000000Y10000000I5000000J0D01*
+G37*
+G04 Third object: small square - dark polarity*
+%TA.AperFunction,ComponentPad2*%
+%TAMyApertureAttributeWithValue,value2*%
+%TAMyApertureAttributeWithoutValue*%
+%LPD*%
+G01*
+G36*
+X7500000Y7500000D02*
+X12500000D01*
+Y12500000D01*
+X7500000D01*
+Y7500000D01*
+G37*
+%TD*%
+G04 Fourth object: small circle - clear polarity*
+%LPC*%
+G36*
+G75*
+X11500000Y10000000D02*
+G03*
+X11500000Y10000000I2500000J0D01*
+G37*
+M02*

@@ -1,0 +1,17 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 4.4.6 - Transparency of Holes*
+G04 Modified by Tony Luken to use a 7 sided polygon*
+
+%FSLAX26Y26*%
+%MOMM*%
+%ADD10C,10X5*%
+%ADD11C,1*%
+%ADD17P,10X7X0.0X5*%
+G01*
+%LPD*%
+D11*
+X-25000000Y-1000000D02*
+X25000000Y1000000D01*
+D17*
+X0Y0D03*
+M02*

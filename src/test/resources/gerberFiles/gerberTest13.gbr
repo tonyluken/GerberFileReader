@@ -1,0 +1,22 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 8.1.10 - Single-Quadrant Arc Mode*
+G04 Demo drawing a full circle in single-quadrant arc mode*
+
+%FSLAX32Y32*%
+%MOMM*%
+%ADD10C,0.1*%
+G74*
+D10*
+X1100Y600D02*
+G04 X300Y600D02*
+G03*
+X700Y1000I400J0D01*
+X300Y600I0J400D01*
+X700Y200I400J0D01*
+X1100Y600I0J400D01*
+X300D02*
+G01*
+X1100D01*
+X700Y200D02*
+Y1000D01*
+M02*

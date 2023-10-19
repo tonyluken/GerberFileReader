@@ -1,0 +1,60 @@
+G04 Test aperture holes, macro equations, and macro primitive rotation*
+
+%FSLAX26Y26*%
+%MOMM*%
+
+%AMBox*
+0 Rectangle with rounded corners, with rotation*
+0 The origin of the aperture is its center*
+0 $1 X-size*
+0 $2 Y-size*
+0 $3 Rounding radius*
+0 $4 Rotation angle, in degrees counterclockwise*
+0 Add two overlapping rectangle primitives as box body*
+21,1,$1,$2-$3-$3,0,0,$4*
+21,1,$1-$3-$3,$2,0,0,$4*
+0 Add four circle primitives for the rounded corners*
+$15=$1/2*
+$6=$2/2*
+$7=2x$3*
+1,1,$7,$15-$3,$6-$3,$4*
+1,1,$7,-$15+$3,$6-$3,$4*
+1,1,$7,-$15+$3,-$6+$3,$4*
+1,1,$7,$15-$3,-$6+$3,$4*
+0 Create a hole offset from the center*
+1,0,$7,0.25x$1,0,$4*% 
+
+%AMSquareWithHole*
+21,1,10,10,0,0,0*
+1,0,5,0,0*%
+
+%TD*%
+%TA.AperFunction,ComponentPad*%
+%TAMyApertureAttributeWithValue,value10SquareWithHole*%
+%ADD10SquareWithHole*%
+%TD*%
+
+%TA.AperFunction,ComponentPad*%
+%TAMyApertureAttributeWithValue,value11C*%
+%ADD11C,1*%
+%TD*%
+
+%TA.AperFunction,ComponentPad*%
+%TAMyApertureAttributeWithValue,value12Box*%
+%ADD12Box,15X10X3X-135*%
+
+G01*
+%LPD*%
+D11*
+X-25000000Y-10000000D02*
+X25000000Y10000000D01*
+D12*
+%TO.P,J2,4*%
+%TO.N,Net-(J2-Pad4)*%
+X0Y0D03*
+%TD*%
+
+D10*
+X15000000Y5000000D03*
+
+M02*

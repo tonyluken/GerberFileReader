@@ -1,0 +1,83 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 4.5.1.6 - Outline, Code 4*
+G04 Modified by Tony Luken to test additional macro primitives and to make the example a complete Gerber file with LF line endings*
+
+%FSLAX26Y26*%
+%MOMM*%
+
+%AMBox*
+0 Rectangle with rounded corners, with rotation*
+0 The origin of the aperture is its center*
+0 $1 X-size*
+0 $2 Y-size*
+0 $3 Rounding radius*
+0 $4 Rotation angle, in degrees counterclockwise*
+0 Add two overlapping rectangle primitives as box body*
+21,1,$1,$2-$3-$3,0,0,$4*
+21,1,$1-$3-$3,$2,0,0,$4*
+0 Add four circle primitives for the rounded corners*
+$15=$1/2*
+$6=$2/2*
+$7=2x$3*
+1,1,$7,$15-$3,$6-$3,$4*
+1,1,$7,-$15+$3,$6-$3,$4*
+1,1,$7,-$15+$3,-$6+$3,$4*
+1,1,$7,$15-$3,-$6+$3,$4*%
+
+%AMSquareWithHole*
+21,1,10,10,0,0,0*
+1,0,5,0,0*%
+
+%AMRectangle*
+22,1,20,3,8,5,20*%
+
+%AMRectangle2*
+21,1,13,1.5,4,5,-30*%
+
+%AMMOIRE*
+6,0,0,5,0.5,0.5,2,0.1,6,17*%
+
+%AMTriangle_30*
+4,1,3,
+1,-1,
+1,1,
+2,1,
+1,-1,
+30*
+%
+
+%AMThermal*
+7,0,0,0.95,0.75,0.175,0.0*%
+
+%ADD10SquareWithHole*%
+%ADD11C,0.01*%
+%ADD12Box,15X10X3X-45*%
+%ADD13Triangle_30*%
+%ADD14Rectangle*%
+%ADD15Rectangle2*%
+%ADD16MOIRE*%
+%ADD17Thermal*%
+
+G01*
+%LPD*%
+D10*
+X25000000Y3000000D03*
+D11*
+X-1000000Y0D02*
+X4000000Y0D01*
+X0Y-1000000D02*
+X0Y4000000D01*
+D12*
+X20000000Y-10000000D03*
+D13*
+X0Y0D03*
+D14*
+X-2000000Y0D03*
+D15*
+X3000000Y-1000000D03*
+D16*
+X4000000Y-2000000D03*
+D17*
+X8000000Y-3000000D03*
+
+M02*

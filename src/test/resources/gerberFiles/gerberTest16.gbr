@@ -1,0 +1,15 @@
+G04 Demonstrate support for deprecated modal D01 operation commands*
+
+%FSLAX32Y32*%
+%MOMM*%
+%ADD10C,0.1*%
+%ADD11C,0.3*%
+D10*
+X700Y1000D01*
+X1200Y1000*
+X1200Y1300*
+D11*
+X1700Y2000D01*
+X2200Y2000*
+X2200Y2300*
+M02*

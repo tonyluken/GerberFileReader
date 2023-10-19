@@ -1,0 +1,25 @@
+G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+G04 Example from section 4.5.1.6 - Outline, Code 4*
+G04 Modified by Tony Luken to make the example a complete Gerber file with CRLF line endings*
+
+%FSLAX26Y26*%
+%MOMM*%
+%AMTriangle_30*
+4,1,3,
+1,-1,
+1,1,
+2,1,
+1,-1,
+30*%
+%ADD11C,0.01*%
+%ADD13Triangle_30*%
+G01*
+%LPD*%
+D11*
+X-1000000Y0D02*
+X4000000Y0D01*
+X0Y-1000000D02*
+X0Y4000000D01*
+D13*
+X0Y0D03*
+M02*
