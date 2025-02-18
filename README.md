@@ -6,6 +6,18 @@ GerberFileReader is intended to be fully compliant with Ucamco's [Gerber Layer F
 
 Note: GerberFileReader is not intended to be a complete Gerber syntax checker. While it will catch many such errors, it is not guaranteed to catch every possible one. If you have doubts of the validity of a Gerber file, run it through Ucamco's online [Reference Gerber Viewer](https://gerber-viewer.ucamco.com/) as it has a complete syntax checker built-in.
 
+## How to get GerberFileReader
+
+For Maven users, simply add the following dependency to your pom:
+
+	<dependency>
+		<groupId>io.github.tonyluken</groupId>
+		<artifactId>GerberFileReader</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+
+Other users can download a jar file [here](https://repo.maven.apache.org/maven2/io/github/tonyluken/GerberFileReader/1.0.0).
+
 ## License
 GerberFileReader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
