@@ -42,8 +42,7 @@ public enum AttributeType {
      * @return the attribute type
      * @throws GerberLayerFormatException if the command is not a TF, TA, or TO command
      * 
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
      * Section 5.2, 5.3, and 5.4 of the Gerber Layer Format Specification</a>
      */
     protected static AttributeType from(String cmd) throws GerberLayerFormatException {

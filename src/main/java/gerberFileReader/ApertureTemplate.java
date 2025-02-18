@@ -38,8 +38,7 @@ import stringMathExpressionEvaluator.StringMathExpressionEvaluator;
 /**
  * A class for defining parameterized aperture templates
  * 
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=22">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=22">
  * Section 2.10 of the Gerber Layer Format Specification</a>
  */
 class ApertureTemplate {

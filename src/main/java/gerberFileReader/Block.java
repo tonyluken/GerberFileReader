@@ -46,8 +46,7 @@ class Block extends Aperture {
      * @throws GerberLayerFormatException if the command passed does not begin with "AB" or if the 
      * aperture id is not valid
      * 
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=111">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=111">
      * Section 4.11 of the Gerber Specification</a>
      */
     Block(String command, AttributeDictionary attributeDictionary) 
