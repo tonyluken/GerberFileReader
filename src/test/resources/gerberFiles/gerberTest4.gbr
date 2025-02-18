@@ -1,60 +1,81 @@
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
+
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
 G04 Test aperture holes, macro equations, and macro primitive rotation*
 
 %FSLAX26Y26*%
-%MOMM*%
+%MOIN*%
 
-%AMBox*
-0 Rectangle with rounded corners, with rotation*
-0 The origin of the aperture is its center*
-0 $1 X-size*
-0 $2 Y-size*
-0 $3 Rounding radius*
+%AMRoundedTriangle*
+0 Equilateral triangle with rounded corners, with rotation*
+0 $1 Major radius*
+0 $2 Rounding radius*
+0 $3 Hole diameter*
 0 $4 Rotation angle, in degrees counterclockwise*
-0 Add two overlapping rectangle primitives as box body*
-21,1,$1,$2-$3-$3,0,0,$4*
-21,1,$1-$3-$3,$2,0,0,$4*
-0 Add four circle primitives for the rounded corners*
-$15=$1/2*
-$6=$2/2*
-$7=2x$3*
-1,1,$7,$15-$3,$6-$3,$4*
-1,1,$7,-$15+$3,$6-$3,$4*
-1,1,$7,-$15+$3,-$6+$3,$4*
-1,1,$7,$15-$3,-$6+$3,$4*
-0 Create a hole offset from the center*
-1,0,$7,0.25x$1,0,$4*% 
+$10=0.5*        0 sin of 30 degrees*
+$11=0.8660254*  0 cos of 30 degrees*
+$20=$1-2x$2*
+0 $21 is undefined which means it should take on the value of zero*
+1,1,2x$2,$20,0,$4*
+1,1,2x$2,$20,0,$4+120*
+1,1,2x$2,$20,$21,$4+240*
+4,1,6,
+$20+$2x$10,-$2x$11,
+$20+$2x$10,$2x$11,
+($2-$20)x$10,($1-$2)x$11,
+-$2-$20x$10,($1-2x$2)x$11,
+-$2-$20x$10,-($1-2x$2)x$11,
+($2-$20)x$10,-($1-$2)x$11,
+$20+$2x$10,-$2x$11,
+$4*
+1,0,$3,0,0,0*%
 
-%AMSquareWithHole*
-21,1,10,10,0,0,0*
-1,0,5,0,0*%
+%AMRectangleWithHole*
+21,1,10,15,0,0,0*
+1,0,6,0,0*%
+
 
 %TD*%
 %TA.AperFunction,ComponentPad*%
-%TAMyApertureAttributeWithValue,value10SquareWithHole*%
-%ADD10SquareWithHole*%
+%TAMyApertureAttributeWithValue,value10RectangleWithHole*%
+%ADD10RectangleWithHole*%
 %TD*%
 
-%TA.AperFunction,ComponentPad*%
 %TAMyApertureAttributeWithValue,value11C*%
 %ADD11C,1*%
 %TD*%
 
-%TA.AperFunction,ComponentPad*%
-%TAMyApertureAttributeWithValue,value12Box*%
-%ADD12Box,15X10X3X-135*%
+%TAMyApertureAttributeWithValue,value22RoundedTriangle*%
+%ADD22RoundedTriangle,30X6X17X45*%
+%TD*%
 
 G01*
 %LPD*%
 D11*
 X-25000000Y-10000000D02*
-X25000000Y10000000D01*
-D12*
+X40000000Y10000000D01*
+D10*
 %TO.P,J2,4*%
 %TO.N,Net-(J2-Pad4)*%
-X0Y0D03*
+X-15000000Y-5000000D03*
 %TD*%
 
-D10*
+G04 D10*
+D22*
 X15000000Y5000000D03*
 
 M02*

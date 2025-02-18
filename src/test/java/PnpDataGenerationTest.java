@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
+ * 
+ * This file is part of GerberFileReader.
+ * 
+ * GerberFileReader is free software: you can redistribute it and/or modify it under the terms of 
+ * the GNU General Public License as published by the Free Software Foundation, either version 3 of 
+ * the License, or (at your option) any later version.
+ * 
+ * GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along with GerberFileReader. If
+ * not, see <http://www.gnu.org/licenses/>.
+ */
+
 import java.awt.geom.Rectangle2D;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,9 +27,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import GerberFileParser.AttributeDictionary;
-import GerberFileParser.GerberFileParser;
-import GerberFileParser.GraphicalObject;
+import gerberFileReader.AttributeDictionary;
+import gerberFileReader.GerberFileReader;
+import gerberFileReader.GraphicalObject;
 
 public class PnpDataGenerationTest {
     Exception savedError;
@@ -30,17 +47,17 @@ public class PnpDataGenerationTest {
         File expectedDir = new File(ClassLoader.getSystemResource("expectedResults").getPath());
         
         File[] gerberFiles = {
-                new File(testFileDir.getPath() + File.separator + "boardDesign" + 
+                new File(testFileDir.getPath() + File.separator + "sampleBoardDesign" + 
                         File.separator + "IR2IP-pnp_top.gbr"),
-                new File(testFileDir.getPath() + File.separator + "boardDesign" + 
+                new File(testFileDir.getPath() + File.separator + "sampleBoardDesign" + 
                         File.separator + "IR2IP-pnp_bottom.gbr")
         };
         
         //The expected pick-and-place data was generated and exported by KiCad into .pos files
         File[] expectedFiles = {
-                new File(expectedDir.getPath() + File.separator + "boardDesign" + 
+                new File(expectedDir.getPath() + File.separator + "sampleBoardDesign" + 
                         File.separator + "IR2IP-top.pos" ),
-                new File(expectedDir.getPath() + File.separator + "boardDesign" + 
+                new File(expectedDir.getPath() + File.separator + "sampleBoardDesign" + 
                         File.separator + "IR2IP-bottom.pos" )
         };
         
@@ -71,23 +88,19 @@ public class PnpDataGenerationTest {
     private List<String> readGerberPnpData(File[] gerberFiles) throws Exception {
         List<String> ret = new ArrayList<>();
         for (File gerberFile : gerberFiles) {
-            GerberFileParser parser = new GerberFileParser(gerberFile);
-            parser.parseFileInBackground(null, null, (ex)->savedError = ex);
+            GerberFileReader parser = new GerberFileReader(gerberFile);
+            parser.parseFile();
             
-            while (!parser.isDone() && !parser.isError()) {
-                //spin
-            }
-            
-            if (parser.isError()) {
-                throw new Exception(savedError.getMessage());
-            }
+//            if (parser.isError()) {
+//                throw new Exception(savedError.getMessage());
+//            }
             
             AttributeDictionary fileAttributes = parser.getFileAttributes();
             if (!fileAttributes.get(".FileFunction").getValues().get(0).equals("Component")) {
                 continue;
             }
             String side = fileAttributes.get(".FileFunction").getValues().get(2).toLowerCase();
-            for (GraphicalObject go : parser.getImageGraphicStream().getStream()) {
+            for (GraphicalObject go : parser.getGraphicsStream().getStream()) {
                 AttributeDictionary goAttributes = go.getAttributes();
                 if (!goAttributes.get(".AperFunction").getValues().get(0).equals("ComponentMain")) {
                     continue;
@@ -163,7 +176,7 @@ public class PnpDataGenerationTest {
 
                     String side = line.substring(0, 3);
 
-                    //For bottom side components, KiCad exports the negated the x coordinate to the
+                    //For bottom side components, KiCad exports the negated x coordinate to the
                     //.pos file so we need to negate it back
                     if (side.equals("bot")) {
                         xCoord *= -1;

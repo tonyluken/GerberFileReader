@@ -1,0 +1,8 @@
+### Footprint positions - created on Thu Feb 13 16:21:11 2025 ###
+### Printed by KiCad version 7.0.10
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val                                      Package                                       PosX       PosY       Rot  Side
+FID5      Fiducial_1mm_Dia_2.54mm_Outer_CopperTop  Fiducial_1mm_Dia_2.54mm_Outer_CopperTop   -96.8300     2.6200    0.0000  bottom
+FID6      Fiducial_1mm_Dia_2.54mm_Outer_CopperTop  Fiducial_1mm_Dia_2.54mm_Outer_CopperTop    -2.8300    66.6200    0.0000  bottom
+## End

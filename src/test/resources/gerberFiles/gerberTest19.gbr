@@ -1,24 +1,43 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 First example from section 4.10.4.8 - Fully-coincident Segments*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
-G04 Example contour: two disjunct areas*
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate a region with two disjoint areas*
+G04 Inspired by the first example from section 4.10.4.8 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specifier and units*
 %FSLAX26Y26*%
 %MOMM*%
+
+G04 Start of the region*
 G36*
-X0Y5000000D02*
-G01*
-Y10000000D01*
-X10000000D01*
-Y0D01*
-X0D01*
-Y5000000D01*
-G04 first fully-coincident linear segment*
-X-1000000D01*
-X-5000000Y1000000D01*
-X-9000000Y5000000D01*
-X-5000000Y9000000D01*
-X-1000000Y5000000D01*
-G04 second fully-coincident linear segment*
-X0D01*
+	G01*
+	X500000Y5000000D02* G04 Start the region at (0.5,5)*
+	Y10000000D01*
+	X10000000D01*
+	X6000000Y8000000D01*
+	X10000000Y-500000D01*
+	X500000D01*
+	Y5000000D01*
+	X-1000000D01* G04 linear segment from (0.5,5) to (-1,5)*
+	G75*
+	G03*
+	X-1000000Y5000000I-2500000J0D01*
+	G01*
+	X500000D01* G04 Linear segment from (-1,5) to (0.5,5), exactly overlaps the one above*
 G37*
+
 M02*

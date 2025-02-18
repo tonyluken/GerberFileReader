@@ -1,49 +1,40 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.9.6 - A block flashed in different mirroring, orientation, scaling*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
-G04 Ucamco copyright* 
-%TF.GenerationSoftware,Ucamco,UcamX,2016.04-160425*% 
-%TF.CreationDate,2016-04-25T00:00:00+01:00*% 
-%FSLAX26Y26*% 
-%MOMM*% 
-%TA.AperFunction,SMDPad,CuDef*%
-%ADD10C,1*% 
-%LPD*% 
-G04 Define block aperture D12* 
-%TD*%
-%ABD12*% 
-%TD*%
-%ADD11C,0.5*% 
-D10* 
-G01* 
-X-2500000Y-1000000D03* 
-Y1000000D03* 
-%LPC*% 
-D11* 
-X-2500000Y-1000000D03* 
-%LPD*% 
-X-500000Y-1000000D02* 
-X2500000D01* 
-G75* 
-G03* 
-X500000Y1000000I-2000000J0D01* 
-G01* 
-%TD*%
-%AB*% 
-G04 Flash block aperture D12 in four different orientation* 
-D12* 
-X0Y0D03* 
-%LMX*% 
-X10000000D03* 
-%LMY*% 
-%LR30.0*% 
-X0Y8000000D03* 
-%LMXY*% 
-%LR45.0*% 
-%LS0.8*% 
-X10000000D03* 
-%LPD*% 
-%LMN*% 
-%LR0.0*% 
-%LS1.0*% 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrates deprecated trailing zero omission*
+
+G04 Format specification (the "T" means trailing zero omission) and units selection*
+%FSTAX26Y26*%
+%MOMM*%
+
+G04 Define the aperture*
+%ADD10C,0.2*%
+
+G04 Linear plotting with dark polarity*
+G01*
+%LPD*%
+
+G04 Draw a diagonal line from (-13.5, 10.4) to (1.0, -4.5)*
+D10*
+X-135Y+104D02*
+X01Y-045D01*
+
+G04 And two flashes at (0, 0) and (-10, 0.5)*
+X0Y0D03*
+X-1Y005D03*
+
 M02*

@@ -1,14 +1,37 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 8.1.10 - Single-Quadrant Arc Mode*
-G04 Demo single-quadrant arc with same start and end points (should be a dot)*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demo single-quadrant arc with same start and end points (should be a dot)*
+G04 Inspired by the example from section 8.1.10 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specifier and units*
 %FSLAX32Y32*%
 %MOMM*%
-%ADD10C,0.1*%
-D10*
-G01*
-X0Y600D02*
+
+G04 Define a standard aperture*
+%ADD10C,0.43*%
+
+G04 Switch to single quadrant arc mode and counterclockwise arc plot mode*
 G74*
-G02*
-X0Y600I500J0D01*
+G03*
+
+G04 Draw an arc with the same start and end point*
+D10*
+X1000Y700D02*
+X1000Y700I1300J0D01*
+
 M02*

@@ -1,75 +1,94 @@
-G04 Test of random multi-quadrant arcs
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Test of random multi-quadrant arcs*
+
+G04 Set coordinate format and units*
 %FSLAX26Y26*%
 %MOMM*%
-%ADD11C,0.01*%
+
+G04 Define the apertures*
+%ADD11C,0.1*%
 %ADD14C,0.2*%
+
+G04 Draw a couple of straight lines*
 G01*
 %LPD*%
 D11*
 X-1000000Y0D02*
-X4000000Y0D01*
+X14000000Y0D01*
 X0Y-1000000D02*
-X0Y4000000D01*
+X0Y14000000D01*
+
+G04 Get ready for arcs*
 D14*
+G75*
+
+G04 Draw some random arcs, both clockwise and counter-clockwise*
+G02*
 X1964181Y3149067D02*
-G75*
-G02*
 X1000000Y3500000I-964181J-1149067D01*
+
 X507596Y2086824D02*
-G75*
-G02*
 X713212Y1590424I492404J-86824D01*
+
 X1956305Y2292372D02*
-G75*
-G02*
 X546010Y2891007I-956305J-292372D01*
+
 X2750000Y2000000D02*
-G75*
-G02*
 X205517Y440739I-1750000J0D01*
+
+G03*
 X-9426424Y3819152D02*
-G75*
-G03*
 X-9201364Y3601815I-573576J-819152D01*
+
 X860551Y3406088D02*
-G75*
-G03*
 X-503508Y4452768I139449J1593912D01*
+
+G02*
 X-6602944Y10836628D02*
-G75*
-G02*
 X-8606503Y9271276I602944J-2836628D01*
+
 X1266681Y-3707564D02*
-G75*
-G02*
 X650000Y-5125833I-1266681J-292436D01*
+
+G03*
 X8386853Y3749132D02*
-G75*
-G03*
 X6209174Y6390867I-2386853J250868D01*
+
 X-5509825Y-9754804D02*
-G75*
-G03*
 X-5782270Y-8126734I-490175J754804D01*
+
+G02*
 X-6909603Y7172164D02*
-G75*
-G02*
 X-9267885Y4459271I909603J-3172164D01*
+
+G03*
 X1749069Y10967548D02*
-G75*
-G03*
 X-8578690Y8488072I-4749069J-2967548D01*
+
 X-6755773Y63581D02*
-G75*
-G03*
 X3632301Y-2526457I3755773J-7063581D01*
+
 X-14422642Y-3005820D02*
-G75*
-G03*
 X-2833964Y-648076I5422642J3005820D01*
-X3316307Y14411D02*
-G75*
+
 G02*
+X3316307Y14411D02*
 X5960519Y2752573I683693J1985589D01*
+
 M02*

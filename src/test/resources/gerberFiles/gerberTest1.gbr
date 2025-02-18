@@ -1,17 +1,56 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.4.6 - Transparency of Holes*
-G04 Modified by Tony Luken to use a 7 sided polygon*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrates holes in standard apertures are transparent and do not erase objects beneath them*
+G04 Also demonstrates usage of standard aperture types Circle, Polygon, and Obround*
+G04 Inspired by the example in section 4.4.6 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specification and units selection*
 %FSLAX26Y26*%
 %MOMM*%
-%ADD10C,10X5*%
-%ADD11C,1*%
-%ADD17P,10X7X0.0X5*%
+
+G04 Define the apertures*
+%TADrawingAperture,value1*%
+%ADD23C,2*%            G04 A circle*
+%TD*%
+%ADD37P,15X7X-5.5X7*%  G04 A regular heptagon with a hole*
+%ADD38O,12X7X3*%       G04 An obround with a hole*
+
+G04 Linear plotting with dark polarity*
 G01*
 %LPD*%
-D11*
-X-25000000Y-1000000D02*
-X25000000Y1000000D01*
-D17*
+
+G04 First draw a diagonal line*
+D23*
+X-10000000Y10000000D02*
+X10000000Y-10000000D01*
+
+G04 Flash the heptagon aperture on top of the line*
+D37*
 X0Y0D03*
+
+G04 Flash the obround on the end of the line after rotating it 45 degrees*
+D38*
+%LR45*%
+X10000000Y-10000000D03*
+
 M02*
+
+This is junk because it is past the end of 
+file command (M02*) and shouldn't %8^%$#* ever get parsed!!!
+
+More junk

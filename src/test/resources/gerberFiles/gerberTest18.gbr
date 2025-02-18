@@ -1,25 +1,47 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.10.4.7 - A Simple Cut-in*
-G04 Modified by Tony Luken to fix coordinates and demonstrate a region overlapping previous draws*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
+
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate a region with a cut-in and that the cut-in is transparent*
+G04 Inspired by the example from section 4.10.4.7 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
 
 %FSLAX26Y26*%
-%ADD10C,0.1*%
-G75*
+%ADD10C,0.55*%
+
+G04 Add a draw that passes under the region*
 D10*
-X5000000Y11000000D02* G04 Add a draw that passes under the region*
+X5000000Y14000000D02* 
 X11000000Y1000000D01*
+
+G04 Define the region*
 G36*
-X2000000Y10000000D02*
 G01*
-X12000000D01*
-Y2000000D01*
-X2000000D01*
-Y6000000D01*
-X5000000D01*
+X3000000Y13500000D02*
+X13000000D01*
+X15000000Y7700000D01*
+X13000000Y1500000D01*
+X3000000D01*
+Y7000000D01*
+X6000000D01* G04 Make the cut-in starting at (3,7) to (6,7)*
+G75*
 G03*
-X5000000Y6000000I3000000J0D01*
+X6000000Y7000000I1950000J0D01* G04 Cut-in a circular hole starting and ending at (6,7)*
 G01*
-X2000000D01*
-Y10000000D01*
+X3000000D01* G04 Finish the cut-in back at (3,7)*
+Y135000000D01* G04 Close the region's contour*
 G37*
+
 M02*

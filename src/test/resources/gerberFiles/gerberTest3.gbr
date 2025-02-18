@@ -1,52 +1,98 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.10.4.6 - Using Polarity to Create Holes*
-G04 Modified by Tony Luken to test Aperture Attributes*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
-G04 This file illustrates how to use polarity to create holes*
-%FSLAX25Y25*%
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrates the use of polarity to create holes and that clear polarity erases everything below*
+G04 Also demonstrates aperture attributes on regions*
+G04 Inspired by the example in section 4.10.4.6 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specifier and units selection*
+%FSLAX26Y26*%
 %MOMM*%
+
+G04 Start with linear mode and dark polarity*
 G01*
-G04 First object: big square - dark polarity*
-%TA.AperFunction,ComponentPad*%
-%TAMyApertureAttributeWithValue,value*%
+%LPD*%
+
+G04 Define an aperture for drawing lines*
+%TAApertureForDrawingLines*%
+%ADD21C,0.55*%
+%TD*%
+
+G04 Draw a diagonal line beneath everything*
+D21*
+%TOBottom
+Line*% G04 Note that the line break is not part of the attribute name*
+X5000000Y20000000D02*
+X20000000Y0D01*
+%TD*%
+
+G04 First region - big diamond with dark polarity*
+%TAMyApertureAttributeWithValue,            Big
+Diamond*% G04 Note that the spaces and line break are part of the attribute value*
 %TAMyApertureAttributeWithoutValue*%
 %LPD*%
 G36*
-X2500000Y2500000D02*
-X17500000D01*
-Y17500000D01*
-X2500000D01*
-Y2500000D01*
+X10000000Y0D02*
+X20000000Y10000000D01*
+X10000000Y20000000D01*
+X0Y10000000D01*
+X10000000Y0D01*
 G37*
 %TD*%
-G04 Second object: big circle - clear polarity*
+
+G04 Second region - big circle with clear polarity*
 %LPC*%
 G36*
 G75*
-X5000000Y10000000D02*
+X5200000Y10000000D02*
 G03*
-X5000000Y10000000I5000000J0D01*
+X5200000Y10000000I4800000J0D01*
 G37*
-G04 Third object: small square - dark polarity*
-%TA.AperFunction,ComponentPad2*%
-%TAMyApertureAttributeWithValue,value2*%
-%TAMyApertureAttributeWithoutValue*%
+
+G04 Third region: small diamond with dark polarity*
+%TAMyApertureAttributeWithValue,SmallDiamond*%
+%TAMyApertureAttributeWithoutValue2*%
 %LPD*%
 G01*
 G36*
-X7500000Y7500000D02*
-X12500000D01*
-Y12500000D01*
-X7500000D01*
-Y7500000D01*
+X6000000Y10000000D02*
+X10000000Y6000000D01*
+X14000000Y10000000D01*
+X10000000Y16000000D01*
+X6000000Y10000000D01*
 G37*
 %TD*%
-G04 Fourth object: small circle - clear polarity*
+
+G04 Fourth region - small circle with clear polarity*
 %LPC*%
 G36*
 G75*
-X11500000Y10000000D02*
+X10000000Y11500000D02*
 G03*
-X11500000Y10000000I2500000J0D01*
+X10000000Y11500000I0J2500000D01*
 G37*
+
+G04 Draw another diagonal line on top of everything*
+%LPD*%
+G01*
+D21*
+%TOTopLine*%
+X0Y0D02*
+X15000000Y20000000D01*
+%TD*%
+
 M02*

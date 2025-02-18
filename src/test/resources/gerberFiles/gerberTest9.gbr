@@ -1,12 +1,35 @@
-G04 Test draws with rectangular apertures
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstration of draws with rectangular apertures*
+
+G04 Coordinate format and units*
 %FSLAX26Y26*%
 %MOMM*%
-%ADD15R,3X1*%
+
+G04 Define a rectangular aperture*
+%ADD15R,4X2*%
+
+G04 Straight line draw mode with dark polarity*
 G01*
 %LPD*%
-D15*
 
+G04 Create some draws at various angles*
+D15*
 X-10000000Y-10000000D02*
 X+10000000Y+10000000D01*
 X+10000000Y-10000000D02*
@@ -24,6 +47,8 @@ X+20000000Y-10000000D02*
 X+20000000Y+10000000D01*
 X-20000000Y+20000000D02*
 X-30000000Y+20000000D01*
+
+G04 Rotate the aperture and create some more draws*
 %LR45.0*%
 X+30000000Y+10000000D02*
 X+90000000Y-10000000D01*
@@ -42,4 +67,5 @@ X+60000000Y+10000000D02*
 X+60000000Y-10000000D01*
 X+20000000Y-20000000D02*
 X+10000000Y-20000000D01*
+
 M02*

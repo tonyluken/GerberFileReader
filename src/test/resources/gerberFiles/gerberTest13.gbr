@@ -1,22 +1,47 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 8.1.10 - Single-Quadrant Arc Mode*
-G04 Demo drawing a full circle in single-quadrant arc mode*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demo drawing a full circle in single-quadrant arc mode*
+G04 Inspired by the example from section 8.1.10 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specifier and units*
 %FSLAX32Y32*%
 %MOMM*%
-%ADD10C,0.1*%
+
+G04 Define a standard aperture*
+%ADD10C,0.43*%
+
+G04 Switch to single quadrant arc mode and counterclockwise arc plot mode*
 G74*
-D10*
-X1100Y600D02*
-G04 X300Y600D02*
 G03*
-X700Y1000I400J0D01*
-X300Y600I0J400D01*
-X700Y200I400J0D01*
-X1100Y600I0J400D01*
-X300D02*
+
+G04 Draw four quarter arcs to make a full circle*
+D10*
+X1000Y700D02*
+X-300Y2000I1300J0D01*
+X-1600Y700I0J1300D01*
+X-300Y-600I1300J0D01*
+X1000Y700I0J1300D01*
+
+G04 Switch back to linear plot mode and draw two straight lines*
 G01*
-X1100D01*
-X700Y200D02*
-Y1000D01*
+X-1500Y200D02*
+X900Y1200D01*
+X200Y-500D02*
+X-800Y1900D01*
+
 M02*

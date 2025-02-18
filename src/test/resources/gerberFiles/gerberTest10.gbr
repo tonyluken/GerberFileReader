@@ -1,63 +1,79 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.9.6 - A block flashed in different mirroring, orientation, scaling*
-G04 Modified by Tony Luken to demo Aperture Attributes with Block Apertures*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
-G04 Ucamco copyright* 
-%TF.GenerationSoftware,Ucamco,UcamX,2016.04-160425*% 
-%TF.CreationDate,2016-04-25T00:00:00+01:00*% 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate aperture transformations applied to an aperture block*
+G04 Inspired by the example from section 4.9.6 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specifier and units*
 %FSLAX26Y26*% 
 %MOMM*% 
+
+G04 Define some standard apertures*
 %TAaperAttr1*%
-%ADD10C,1*% 
+%ADD10C,1*%
+%TD*% 
+%ADD37P,1X7X-5.5X0*%  G04 A regular heptagon*
 %LPD*% 
 
-G04 Define block aperture D12* 
+G04 Define an aperture block* 
 %TD*%
 %TAaperBlockAttr1,value1*%
 %ABD12*% 
-%TD*%
-%TAaperAttr2*%
-%ADD11C,0.5*% 
-D10* 
-G01* 
-X-2500000Y-1000000D03* 
-Y1000000D03* 
-%LPC*% 
-D11* 
-X-2500000Y-1000000D03* 
-%LPD*% 
-X-500000Y-1000000D02* 
-X2500000D01* 
-G75* 
-G03* 
-X500000Y1000000I-2000000J0D01* 
-G01* 
-%TD*%
-%TAaperBlockAttr2,value2*%
+	%TD*%
+	%TAaperAttr2*%
+	%ADD11C,0.5*% 
+	D37* 
+	G01* 
+	X2500000Y-1000000D03* 
+	X1000000Y1000000D03* 
+	%LPC*% 
+	D11* 
+	X2500000Y-1000000D03*
+	 
+	%LPD*% 
+	X-500000Y-1000000D02* 
+	X2500000Y1000000D01* 
+	G75* 
+	G03* 
+	X-500000Y1000000I-1500000J0D01* 
+	G01* 
+	%TD*%
+	%TAaperBlockAttr2,value2*%
 %AB*%
  
-G04 Flash block aperture D12 in four different orientation* 
+G04 Flash the block with four different aperture transformations* 
 D12* 
-%TO.BlockId,Block1*%
-X0Y0D03* 
+%TOBlockId,Block1*%
+X-1000000Y0D03* 
 
 %LMX*% 
-%TO.BlockId,Block2*%
-X10000000D03*
+%TOBlockId,Block2*%
+X9000000D03*
  
 %LMY*% 
-%LR30.0*% 
-%TO.BlockId,Block3*%
-X0Y8000000D03*
+%LR45.0*% 
+%TOBlockId,Block3*%
+X-1000000Y7000000D03*
  
 %LMXY*% 
-%LR45.0*% 
-%LS0.8*% 
-%TO.BlockId,Block4*%
-X10000000D03*
- 
-%LPD*% 
-%LMN*% 
-%LR0.0*% 
-%LS1.0*% 
+%LR25.0*% 
+%LS0.6*% 
+%TOBlockId,Block4*%
+X9000000D03*
+%LMN*%
+
 M02*

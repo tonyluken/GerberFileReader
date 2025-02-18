@@ -1,0 +1,632 @@
+.HEA
+.TIM 2/13/2025 3:16:38 PM
+.APP "Eeschema 7.0.10"
+.TYP FULL
+
+.ADD_COM     U6     "CAT811STBI-GT3"     "Package_TO_SOT_SMD:SOT-143"
+.ADD_COM     Q4     "BC857BLT1G"     "Package_TO_SOT_SMD:SOT-23"
+.ADD_COM     R31     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     J2     "Conn_01x06_Male"     "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal"
+.ADD_COM     R28     "0"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R29     "1k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R30     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     D2     "1N4148W"     "Diode_SMD:D_SOD-123"
+.ADD_COM     C3     "4.7uF"     "Capacitor_Tantalum_SMD:CP_EIA-7343-15_Kemet-W"
+.ADD_COM     C2     "1uF"     "Capacitor_SMD:C_1812_4532Metric"
+.ADD_COM     D1     "SMAJ58A"     "digikey-footprints:DO-214AC"
+.ADD_COM     C1     "0.1uF"     "Capacitor_SMD:C_0805_2012Metric"
+.ADD_COM     U1     "LTC4267XGN"     "Package_SO:SSOP-16_3.9x4.9mm_P0.635mm"
+.ADD_COM     R1     "45.3"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R4     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     D3     "1N4148W"     "Diode_SMD:D_SOD-123"
+.ADD_COM     D4     "BAS516"     "Diode_SMD:D_SOD-523"
+.ADD_COM     R6     "220k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R2     "220k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     Q1     "MMBTA42LT1G"     "digikey-footprints:SOT-23-3"
+.ADD_COM     Z1     "9.1V"     "digikey-footprints:SOD-123"
+.ADD_COM     R8     "330"     "Resistor_SMD:R_2512_6332Metric"
+.ADD_COM     D6     "BAS516"     "Diode_SMD:D_SOD-523"
+.ADD_COM     C6     "150pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R10     "499"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R12     "10"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     D7     "PDS1040L"     "luken-footprints:POWERDI5"
+.ADD_COM     C10     "100uF"     "Capacitor_SMD:C_1210_3225Metric"
+.ADD_COM     C9     "470pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C11     "470uF"     "Capacitor_Tantalum_SMD:CP_EIA-7343-30_AVX-N"
+.ADD_COM     TP1     "TestPoint"     "$noname"
+.ADD_COM     R5     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     Q2     "2N7002"     "digikey-footprints:SOT-23-3"
+.ADD_COM     D5     "BAS516"     "Diode_SMD:D_SOD-523"
+.ADD_COM     C4     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R3     "100k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C7     "2200pF_250VAC"     "luken-footprints:C_2211_5728Metric"
+.ADD_COM     C5     "4.7uF"     "Capacitor_SMD:C_0805_2012Metric"
+.ADD_COM     U2     "PS2911-1"     "luken-footprints:PS2911-1"
+.ADD_COM     R7     "6.8k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R9     "0.068"     "Resistor_SMD:R_1206_3216Metric"
+.ADD_COM     Q3     "SiHD9N60E"     "Package_TO_SOT_SMD:TO-252-2"
+.ADD_COM     U3     "TLV431A"     "Package_TO_SOT_SMD:SOT-23"
+.ADD_COM     R11     "499"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C8     "33nF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R14     "60.4k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R13     "100k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     T1     "PA1136NL"     "luken-footprints:PA1136NL"
+.ADD_COM     U5     "ATSAM3X8EA-AU"     "Package_QFP:LQFP-144_20x20mm_P0.5mm"
+.ADD_COM     C50     "8pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C51     "8pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     Y2     "12.000MHz"     "Crystal:Crystal_SMD_7050-4Pin_7.0x5.0mm"
+.ADD_COM     C52     "18pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     Y3     "32.768KHz"     "Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm"
+.ADD_COM     R26     "39"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R27     "39"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C53     "18pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C37     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C40     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C43     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C39     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C46     "4.7uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C44     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C41     "10pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R25     "6.8k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     FB2     "Ferrite_Bead"     "Inductor_SMD:L_0805_2012Metric"
+.ADD_COM     C34     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C36     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C32     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C31     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C33     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C30     "10uF"     "Capacitor_Tantalum_SMD:CP_EIA-1608-08_AVX-J"
+.ADD_COM     C29     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R24     "100k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C38     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C42     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C47     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C45     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C48     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C49     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C35     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R34     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     J5     "SJ-3524"     "luken-footprints:SJ-3524-SMT"
+.ADD_COM     Q10     "MMSS8050-H-TP"     "Package_TO_SOT_SMD:SOT-23"
+.ADD_COM     R40     "33.0"     "Resistor_SMD:R_0805_2012Metric"
+.ADD_COM     R37     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     Q7     "MMBTA42LT1G"     "digikey-footprints:SOT-23-3"
+.ADD_COM     Q6     "MMBTA42LT1G"     "digikey-footprints:SOT-23-3"
+.ADD_COM     R33     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C56     "100uF"     "Capacitor_SMD:C_1210_3225Metric"
+.ADD_COM     Q9     "MMSS8050-H-TP"     "Package_TO_SOT_SMD:SOT-23"
+.ADD_COM     R41     "1k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     J3     "SJ-3524"     "luken-footprints:SJ-3524-SMT"
+.ADD_COM     J4     "SJ-3524"     "luken-footprints:SJ-3524-SMT"
+.ADD_COM     J6     "SJ-3524"     "luken-footprints:SJ-3524-SMT"
+.ADD_COM     C55     "100uF"     "Capacitor_SMD:C_1210_3225Metric"
+.ADD_COM     R32     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R36     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R39     "33.0"     "Resistor_SMD:R_0805_2012Metric"
+.ADD_COM     C54     "100uF"     "Capacitor_SMD:C_1210_3225Metric"
+.ADD_COM     Q5     "MMBTA42LT1G"     "digikey-footprints:SOT-23-3"
+.ADD_COM     R35     "10k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     Q8     "MMSS8050-H-TP"     "Package_TO_SOT_SMD:SOT-23"
+.ADD_COM     R38     "33.0"     "Resistor_SMD:R_0805_2012Metric"
+.ADD_COM     R17     "49.9"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     U4     "W5500"     "Package_QFP:LQFP-48_7x7mm_P0.5mm"
+.ADD_COM     R19     "49.9"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C19     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R16     "12.4k"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C14     "4.7uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R23     "10"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     R20     "49.9"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C27     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C21     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C25     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C22     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C26     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     FB1     "Ferrite_Bead"     "Inductor_SMD:L_0805_2012Metric"
+.ADD_COM     C16     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C15     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R15     "1M"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C13     "33pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     Y1     "25MHz"     "Crystal:Crystal_SMD_TXC_7A-2Pin_5x3.2mm"
+.ADD_COM     C12     "33pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C20     "0.1uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     R18     "49.9"     "Resistor_SMD:R_0603_1608Metric"
+.ADD_COM     C18     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C17     "0.01uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C28     "0.022uF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     J1     "WE-RJ45LAN"     "luken-footprints:7499210121A"
+.ADD_COM     R21     "330"     "Resistor_SMD:R_0805_2012Metric"
+.ADD_COM     R22     "330"     "Resistor_SMD:R_0805_2012Metric"
+.ADD_COM     C23     "6800pF"     "Capacitor_SMD:C_0603_1608Metric"
+.ADD_COM     C24     "6800pF"     "Capacitor_SMD:C_0603_1608Metric"
+
+
+.ADD_TER   C10   1     "+3V3"
+.TER       C11   1
+            C15   1
+            C16   1
+            C29   1
+            C30   1
+            C31   1
+            C33   1
+            C35   1
+            C38   1
+            C42   1
+            C45   1
+            C47   1
+            C48   1
+            C49   1
+            C54   1
+            C55   1
+            C56   1
+            C9   2
+            D7   1
+            FB1   2
+            J1   11
+            J1   13
+            J6   2
+            Q4   2
+            R11   2
+            R13   1
+            R24   1
+            R28   2
+            R31   2
+            R38   1
+            R39   1
+            R40   1
+            R41   1
+            U4   28
+            U5   105
+            U5   11
+            U5   125
+            U5   41
+            U5   52
+            U5   57
+            U5   62
+            U5   73
+            U5   75
+            U6   4
+
+.ADD_TER   C10   2     "GND"
+.TER       C11   2
+            C12   2
+            C13   2
+            C14   2
+            C15   2
+            C16   2
+            C17   2
+            C18   2
+            C19   2
+            C20   2
+            C21   2
+            C22   2
+            C25   2
+            C26   2
+            C27   2
+            C28   1
+            C30   2
+            C31   2
+            C32   2
+            C33   2
+            C34   2
+            C35   2
+            C36   2
+            C37   2
+            C38   2
+            C39   2
+            C40   2
+            C41   2
+            C42   2
+            C43   2
+            C44   2
+            C45   2
+            C46   2
+            C47   2
+            C48   2
+            C49   2
+            C50   2
+            C51   2
+            C52   2
+            C53   2
+            C54   2
+            C55   2
+            C56   2
+            C7   1
+            J1   SH1
+            J1   SH2
+            J2   6
+            J6   1
+            Q10   2
+            Q5   2
+            Q6   2
+            Q7   2
+            Q8   2
+            Q9   2
+            R14   2
+            R16   2
+            R25   2
+            T1   10
+            T1   9
+            TP1   1
+            U3   3
+            U4   14
+            U4   16
+            U4   19
+            U4   23
+            U4   29
+            U4   3
+            U4   48
+            U4   9
+            U5   106
+            U5   12
+            U5   126
+            U5   33
+            U5   44
+            U5   46
+            U5   51
+            U5   54
+            U5   58
+            U5   74
+            U6   1
+            Y2   2
+            Y2   4
+
+.ADD_TER   C29   2     "~{MASTER_RESET}"
+.TER       U4   37
+            U5   47
+            U6   2
+
+.ADD_TER   J2   3     "RXIN"
+.TER       U5   27
+
+.ADD_TER   Q4   3     "ERASE"
+.TER       U5   130
+
+.ADD_TER   Q1   1     "Net-(Q1-B)"
+.TER       R2   2
+            Z1   K
+
+.ADD_TER   J2   2     "TXOUT"
+.TER       U5   2
+
+.ADD_TER   D5   1     "Net-(D5-K)"
+.TER       R7   2
+            U2   4
+
+.ADD_TER   J2   5     "/PROGRAMMING/~{ERASE_CMD}"
+.TER       R30   2
+
+.ADD_TER   R29   1     "Net-(U6-~{MR})"
+.TER       U6   3
+
+.ADD_TER   Q4   1     "Net-(Q4-B)"
+.TER       R30   1
+            R31   1
+
+.ADD_TER   J2   4     "Net-(J2-Pin_4)"
+.TER       R28   1
+
+.ADD_TER   J2   1     "Net-(J2-Pin_1)"
+.TER       R29   2
+
+.ADD_TER   C1   1     "VPORTP"
+.TER       C2   1
+            C3   1
+            D1   K
+            D2   2
+            J1   9
+            Q1   3
+            R2   1
+            R6   1
+            R8   1
+            T1   4
+
+.ADD_TER   D2   1     "Net-(D2-K)"
+.TER       U1   13
+
+.ADD_TER   C4   1     "/PoE_3.3V/PVCC"
+.TER       C5   1
+            D4   1
+            D6   1
+            R3   1
+            R6   2
+            R7   1
+            U1   4
+
+.ADD_TER   C2   2     "GNDPWR"
+.TER       C3   2
+            C4   2
+            C5   2
+            C7   2
+            D3   2
+            Q2   2
+            R9   2
+            T1   1
+            U1   1
+            U1   10
+            U1   15
+            U1   16
+            U1   8
+            U1   9
+            U2   3
+            Z1   A
+
+.ADD_TER   C1   2     "VPORTN"
+.TER       D1   A
+            J1   10
+            R1   2
+            U1   12
+            U1   7
+
+.ADD_TER   R3   2     "Net-(U1-~{PWRGD})"
+.TER       R4   1
+            U1   11
+
+.ADD_TER   Q3   1     "Net-(Q3-G)"
+.TER       U1   3
+
+.ADD_TER   R5   1     "Net-(U1-SENSE)"
+.TER       U1   14
+
+.ADD_TER   D5   2     "Net-(D5-A)"
+.TER       Q2   3
+            U1   2
+
+.ADD_TER   R1   1     "Net-(U1-RCLASS)"
+.TER       U1   5
+
+.ADD_TER   D3   1     "Net-(D3-K)"
+.TER       Q2   1
+            R4   2
+
+.ADD_TER   D4   2     "Net-(D4-A)"
+.TER       Q1   2
+
+.ADD_TER   D7   2     "Net-(D7-A)"
+.TER       R12   1
+            T1   7
+            T1   8
+
+.ADD_TER   C9   1     "Net-(C9-Pad1)"
+.TER       R12   2
+
+.ADD_TER   R10   2     "Net-(R10-Pad2)"
+.TER       T1   2
+
+.ADD_TER   C6   2     "Net-(Q3-D)"
+.TER       Q3   2
+            T1   3
+
+.ADD_TER   Q3   3     "Net-(Q3-S)"
+.TER       R5   2
+            R9   1
+
+.ADD_TER   C8   1     "Net-(U2-K)"
+.TER       U2   2
+            U3   2
+
+.ADD_TER   R11   1     "Net-(U2-A)"
+.TER       U2   1
+
+.ADD_TER   C8   2     "Net-(U3-REF)"
+.TER       R13   2
+            R14   1
+            U3   1
+
+.ADD_TER   C6   1     "Net-(C6-Pad1)"
+.TER       R8   2
+
+.ADD_TER   D6   2     "Net-(D6-A)"
+.TER       R10   1
+
+.ADD_TER   R27   1     "Net-(U5B-DFSDM)"
+.TER       U5   43
+
+.ADD_TER   U5   144     "TIMER_PULSE"
+.TER       U5   82
+            U5   85
+
+.ADD_TER   J6   3     "IRREC"
+.TER       R41   2
+            U5   26
+            U5   68
+
+.ADD_TER   U4   34     "MISO"
+.TER       U5   108
+
+.ADD_TER   U4   35     "MOSI"
+.TER       U5   109
+
+.ADD_TER   U4   33     "SCLK"
+.TER       U5   110
+
+.ADD_TER   U4   32     "ECSn"
+.TER       U5   111
+
+.ADD_TER   C17   1     "+3.3VA"
+.TER       C20   1
+            C21   1
+            C22   1
+            C25   1
+            C26   1
+            C27   1
+            FB1   1
+            R18   1
+            R20   1
+            R23   2
+            U4   11
+            U4   15
+            U4   17
+            U4   21
+            U4   4
+            U4   8
+
+.ADD_TER   C28   2     "Net-(J1-TCT)"
+.TER       J1   4
+            R23   1
+
+.ADD_TER   J1   5     "/Ethernet/TXP"
+.TER       R20   2
+            U4   2
+
+.ADD_TER   R32   1     "~{IRTXEN1}"
+.TER       U5   133
+
+.ADD_TER   R34   1     "~{IRTXEN3}"
+.TER       U5   135
+
+.ADD_TER   R33   1     "~{IRTXEN2}"
+.TER       U5   134
+
+.ADD_TER   C50   1     "Net-(U5B-XOUT)"
+.TER       U5   35
+            Y2   1
+
+.ADD_TER   U4   36     "~{EINT}"
+.TER       U5   139
+
+.ADD_TER   R26   1     "Net-(U5B-DHSDP)"
+.TER       U5   37
+
+.ADD_TER   J5   2     "Net-(J5-T)"
+.TER       R40   2
+
+.ADD_TER   J5   1     "Net-(J5-S)"
+.TER       Q10   3
+
+.ADD_TER   C23   2     "/Ethernet/RXP"
+.TER       R19   1
+            U4   6
+
+.ADD_TER   R35   1     "IRTX"
+.TER       R36   1
+            R37   1
+            U5   60
+
+.ADD_TER   C52   1     "Net-(U5B-XOUT32)"
+.TER       U5   49
+            Y3   1
+
+.ADD_TER   C51   1     "Net-(U5B-XIN)"
+.TER       U5   36
+            Y2   3
+
+.ADD_TER   C53   1     "Net-(U5B-XIN32)"
+.TER       U5   48
+            Y3   2
+
+.ADD_TER   R27   2     "Net-(U5B-DHSDM)"
+.TER       U5   38
+
+.ADD_TER   R26   2     "Net-(U5B-DFSDP)"
+.TER       U5   42
+
+.ADD_TER   C12   1     "/Ethernet/XI"
+.TER       R15   2
+            U4   30
+            Y1   1
+
+.ADD_TER   C32   1     "/SAM3X8E Power/VDDCORE"
+.TER       C34   1
+            C36   1
+            C39   1
+            C43   1
+            C44   1
+            C46   1
+            FB2   1
+            U5   10
+            U5   104
+            U5   124
+            U5   45
+            U5   56
+            U5   61
+
+.ADD_TER   R24   2     "Net-(U5A-FWUP)"
+.TER       U5   53
+
+.ADD_TER   C37   1     "/SAM3X8E Power/VDDPLL"
+.TER       C40   1
+            FB2   2
+            U5   34
+
+.ADD_TER   Q6   3     "Net-(Q6-C)"
+.TER       Q9   1
+            R36   2
+
+.ADD_TER   C41   1     "Net-(U5A-VBG)"
+.TER       R25   1
+            U5   40
+
+.ADD_TER   Q7   1     "Net-(Q7-B)"
+.TER       R34   2
+
+.ADD_TER   Q10   1     "Net-(Q10-B)"
+.TER       Q7   3
+            R37   2
+
+.ADD_TER   Q6   1     "Net-(Q6-B)"
+.TER       R33   2
+
+.ADD_TER   J4   1     "Net-(J4-S)"
+.TER       Q9   3
+
+.ADD_TER   J3   2     "Net-(J3-T)"
+.TER       R38   2
+
+.ADD_TER   J3   1     "Net-(J3-S)"
+.TER       Q8   3
+
+.ADD_TER   J4   2     "Net-(J4-T)"
+.TER       R39   2
+
+.ADD_TER   Q5   3     "Net-(Q5-C)"
+.TER       Q8   1
+            R35   2
+
+.ADD_TER   Q5   1     "Net-(Q5-B)"
+.TER       R32   2
+
+.ADD_TER   C19   1     "Net-(J1-RCT)"
+.TER       J1   3
+            R17   2
+            R19   2
+
+.ADD_TER   C24   2     "/Ethernet/RXN"
+.TER       R17   1
+            U4   5
+
+.ADD_TER   J1   6     "/Ethernet/TXN"
+.TER       R18   2
+            U4   1
+
+.ADD_TER   R21   2     "/Ethernet/LINKLED"
+.TER       U4   25
+
+.ADD_TER   R22   2     "/Ethernet/ACTLED"
+.TER       U4   27
+
+.ADD_TER   C14   1     "Net-(U4-TOCAP)"
+.TER       U4   20
+
+.ADD_TER   R16   1     "Net-(U4-EXRES1)"
+.TER       U4   10
+
+.ADD_TER   C18   1     "Net-(U4-1V2O)"
+.TER       U4   22
+
+.ADD_TER   C13   1     "/Ethernet/XO"
+.TER       R15   1
+            U4   31
+            Y1   2
+
+.ADD_TER   J1   14     "Net-(J1-GK)"
+.TER       R22   1
+
+.ADD_TER   J1   12     "Net-(J1-YK)"
+.TER       R21   1
+
+.ADD_TER   C24   1     "/Ethernet/RDN"
+.TER       J1   2
+
+.ADD_TER   C23   1     "/Ethernet/RDP"
+.TER       J1   1
+
+.END

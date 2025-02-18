@@ -1,17 +1,66 @@
-G04 Demonstrate support for deprecated modal D01 operation commands*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate support for a number of deprecated commands*
+
+G04 Format specifier and units*
 %FSLAX32Y32*%
-%MOMM*%
+G70* G04 Set to inch mode using deprecated G70*
+G90* G04 Set to absolute mode using deprecated G90*
+
+G04 Use a bunch of deprecated commands to confirm the default state*
+%SRX1Y1I0J0*%
+%INThis is the image name*%
+%LNThis loads the name*%
+%ASAXBY*%
+%IPPOS*%
+%IR0*%
+%MIA0B0*%
+%OFA0B0*%
+%SFA1B1*%
+M01*
+
+G04 Define some standard apertures*
 %ADD10C,0.1*%
 %ADD11C,0.3*%
-%AMRECTANGLE*
-21,1,6.8,1.2,3.4,0.6,30*%
+
+G04 Draw some lines*
+N0042G54* G04 Deprecated line number and deprecated Select Aperture command*
 D10*
-X700Y1000D01*
-X1200Y1000*
-X1200Y1300*
+X400Y400D2*
+X700Y1300D1*
+X1200Y1000D01*
+X1200Y1300D01*
 D11*
 X1700Y2000D01*
-X2200Y2000*
-X2200Y2300*
+X2200Y2000D01*
+X1500Y1500D01*
+
+G04 Flash the aperture*
+G55* G04 Deprecated Prepare to Flash*
+X1800Y1000D03*
+
+G04 And a region*
+G36*
+	X800Y800D02* G04 Start at (8,8)*
+	X2000Y0D01* G04 Contour to (20,0)*
+	X2500Y1500D01* G04 Contour to (25,15)*
+	X2000Y400D01*  G04 Contour to (20,4)*
+	X800Y800D01*  G04 Close the contour*
+G37*
+
 M02*

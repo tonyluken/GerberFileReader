@@ -1,9 +1,32 @@
-G04 Demonstrate support for deprecated modal D01 operation commands*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate support for deprecated modal D01 operation commands*
+G04 Also shows current point is initialized to (0,0)*
+
+G04 Format specifier and units*
 %FSLAX32Y32*%
-%MOMM*%
+G71* G04 set to millimeter mode using deprecated G71*
+
+G04 Define some standard apertures*
 %ADD10C,0.1*%
 %ADD11C,0.3*%
+
+G04 Draw some lines skipping the D01 draw commands after the first one*
 D10*
 X700Y1000D01*
 X1200Y1000*
@@ -12,4 +35,14 @@ D11*
 X1700Y2000D01*
 X2200Y2000*
 X2200Y2300*
+
+G04 Show the same thing can be done in regions*
+G36*
+	X1500Y500D02* G04 Start at (15,5)*
+	X2000Y0D01* G04 Contour to (20,0)*
+	X2500Y1500* G04 Contour to (25,15)*
+	X2000*      G04 Contour to (20,15)*
+	X1500Y500*  G04 Close the contour*
+G37*
+
 M02*

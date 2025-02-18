@@ -1,54 +1,79 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.11.4 - A complete Gerber file with nested blocks*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
-G04 Ucamco copyright*
-%TF.GenerationSoftware,Ucamco,UcamX,2016.04-160425*%
-%TF.CreationDate,2016-04-25T00:00;00+01:00*%
-%TF.Part,Other,Testfile*%
-%FSLAX46Y46*%
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstration of block apertures including nested blocks and Step and Repeat blocks*
+G04 Inspired by the example from section 4.11.4 of Ucamco's Gerber Layer Format Specification, Revision 2023.08*
+
+G04 Format specification and file units*
+%FSLAX36Y36*%
 %MOMM*%
-G04 Define standard apertures*
-%ADD10C,7.500000*%
-%TA.AperFunction,ComponentPad*%
-%ADD11C,15*%
-%TD*%
-%ADD12R,20X10*%
-%ADD13R,10X20*%
-G04 Define block aperture 100, consisting of two draws and a round dot*
+
+G04 Define some standard apertures*
+%ADD10C,6.125000*%
+%ADD11P,21X7X-5.5X11*%  G04 A regular heptagon with a hole*
+%ADD12R,22.32X11.1234*%
+%ADD13R,11.1234X22.32*%
+
+G04 Define block aperture 100, consisting of two draws and a heptagon*
+%TABlockAperture100*%
 %ABD100*%
+%TADummy*%
 D10*
-X65532000Y17605375D02*
-Y65865375D01*
-X-3556000D01*
+X75432100Y17654321D02*
+X-3556000Y75432100D01*
+X65432100D01*
 D11*
-X-3556000Y17605375D03*
-%AB*%
-G04 Define block aperture 102, consisting of 2x3 flashes of aperture 101 
+X-3556000Y25000000D03*
+%AB*% G04 End of block aperture 100*
+%TD*%
+
+G04 Define block aperture 102, consisting of 2x2 flashes of aperture 101 
 and 1 flash of D12*
+%TABlockAperture102*%
 %ABD102*%
-G04 Define nested block aperture 101, consisting of 2x2 flashes of 
-aperture 100*
-%ABD101*%
-D100*
-X0Y0D03*
-X0Y70000000D03*
-X100000000Y0D03*
-X100000000Y70000000D03*
-%AB*%
-D101*
-X0Y0D03*
-X0Y160000000D03*
-X0Y320000000D03*
-X230000000Y0D03*
-X230000000Y160000000D03*
-X230000000Y320000000D03*
-D12*
-X19500000Y-10000000D03*
-%AB*%
+	%TD*%
+	G04 Define nested block aperture 101, consisting of 2x3 flashes of aperture 100*
+	%TABlockAperture101*%
+	%ABD101*%
+		%TADummy*%
+		D100*
+		X0Y0D03*
+		X0Y70000000D03*
+		X0Y140000000D03*
+		X100000000Y0D03*
+		Y70000000D03*
+		Y140000000D03*
+	%AB*% G04 End of nested block aperture 101*
+	D101*
+	X0Y0D03*
+	Y250000000D03*
+	X220000000Y0D03*
+	Y250000000D03*
+	D12*
+	X19500000Y-10000000D03*
+%AB*% G04 End of block aperture 102
+
 G04 Flash D13 twice outside of blocks*
 D13*
 X-30000000Y10000000D03*
+%LR90*%
 X143000000Y-30000000D03*
+%LR0*%
+
 G04 Flash block 102 3x2 times*
 D102*
 X0Y0D03*
@@ -57,14 +82,18 @@ X500000000Y0D03*
 X500000000Y520000000D03*
 X1000000000Y0D03*
 X1000000000Y520000000D03*
+
 G04 A block of two flashes is repeated 8x7 times*
-X320000000Y320000000D02*
-%SRX8Y7I50.0J40.0*%
-D13*
-X123456Y789012D03*
-D11*
-X456789Y012345D03*
+%TD*%
+%TAStepRepeat*%
+%SRX8Y7I200J175*%
+	%TADummy*%
+	D13*
+	X123456Y789012D03*
+	D11*
+	%LS2*%
+	X456789Y012345D03*
+	%LS1*%
 %SR*%
-D101*
-X1823456789Y876543210D03*
+
 M02*

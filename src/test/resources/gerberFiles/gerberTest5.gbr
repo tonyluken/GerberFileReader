@@ -1,25 +1,73 @@
-G04 Copied from Ucamco's Gerber Layer Format Specification, Revision 2023.08*
-G04 Example from section 4.5.1.6 - Outline, Code 4*
-G04 Modified by Tony Luken to make the example a complete Gerber file with CRLF line endings*
+G04 ================================================================================================
+Copyright (C) 2025 Tony Luken <tonyluken62+gerberfilereader.gmail.com>
 
+This file is part of GerberFileReader.
+
+GerberFileReader is free software: you can redistribute it and/or modify it under the terms of
+the GNU General Public License as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+GerberFileReader is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GerberFileReader. If
+not, see <http://www.gnu.org/licenses/>.
+===================================================================================================*
+
+G04 Demonstrate various macro primitives using CRLF line endings*
+
+G04 Set coordinate format and units*
 %FSLAX26Y26*%
 %MOMM*%
-%AMTriangle_30*
-4,1,3,
-1,-1,
-1,1,
-2,1,
-1,-1,
-30*%
-%ADD11C,0.01*%
-%ADD13Triangle_30*%
+
+G04 Demo Lower Left Line Primitive*
+%AMRectangle*
+22,1,20,3,8,5,20*%
+
+G04 Demo Center Line Primitive*
+%AMRectangle2*
+21,1,13,1.5,4,5,-30*%
+
+G04 Demo Moire Primitive*
+%AMMoire*
+6,3,-7,5,0.5,0.5,2,0.1,6,17*%
+
+G04 Demo Thermal Primitive*
+%AMThermal*
+7,3,-5,0.95,0.75,0.175,45.0*%
+
+G04 Demo Polygon Primitive*
+%AMPolygon*
+5,1,5,7,-3,7.5,30*%
+
+G04 Create the apertures*
+%ADD11C,0.1*%
+%ADD14Rectangle*%
+%ADD15Rectangle2*%
+%ADD16Moire*%
+%ADD17Thermal*%
+%ADD18Polygon*%
+
+G04 Linear draw mode and dark polarity*
 G01*
 %LPD*%
+
+G04 Create the image*
 D11*
 X-1000000Y0D02*
-X4000000Y0D01*
+X14000000Y0D01*
 X0Y-1000000D02*
-X0Y4000000D01*
-D13*
-X0Y0D03*
+X0Y14000000D01*
+D14*
+X-2000000Y0D03*
+D15*
+X3000000Y-1000000D03*
+D16*
+X4000000Y-1000000D03*
+D17*
+X8000000Y-3000000D03*
+D18*
+X15000000Y5000000D03*
+
 M02*
