@@ -19,8 +19,7 @@ package gerberFileReader;
 
 /**
  * A class to hold a Gerber Step and Repeat Block
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=116">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=116">
  * Section 4.12 of the Gerber Layer Format Specification</a>
  */
 class StepAndRepeatBlock extends Block {

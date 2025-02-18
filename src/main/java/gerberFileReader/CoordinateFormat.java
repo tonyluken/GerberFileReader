@@ -21,8 +21,7 @@ package gerberFileReader;
 /**
  * A class to hold the Gerber format specification and apply it to parse coordinates.
  * 
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=48">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=48">
  * Section 4.2.2 of the Gerber Layer Format Specification</a>
  */
 class CoordinateFormat {
@@ -40,8 +39,7 @@ class CoordinateFormat {
      * @param formatSpecification - the format specification string
      * @throws GerberLayerFormatException if the string is invalid or contains an unsupported format
      * 
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=48">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=48">
      * Section 4.2.2 of the Gerber Specification</a>
      */
     public CoordinateFormat(String formatSpecification) throws GerberLayerFormatException {

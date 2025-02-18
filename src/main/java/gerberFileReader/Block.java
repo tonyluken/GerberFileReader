@@ -20,11 +20,9 @@ package gerberFileReader;
 /**
  * A class to represent a Gerber Aperture Block
  * 
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=14">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=14">
  * Section 2.4 of the Gerber Layer Format Specification</a>
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=111">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=111">
  * Section 4.11 of the Gerber Layer Format Specification</a>
  */
 class Block extends Aperture {

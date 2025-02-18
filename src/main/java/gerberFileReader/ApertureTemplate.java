@@ -54,11 +54,9 @@ class ApertureTemplate {
      * a standard aperture template is constructed (CIRCLE, RECTANGLE, OBROUND or POLYGON 
      * respectively). Any other name and a macro aperture template is constructed.
      * 
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=51">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=51">
      * Section 4.4 of the Gerber Specification</a>
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=57">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=57">
      * Section 4.5 of the Gerber Specification</a>
      */
     ApertureTemplate(String templateName) {

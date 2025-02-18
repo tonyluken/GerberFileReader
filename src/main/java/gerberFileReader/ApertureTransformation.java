@@ -22,8 +22,7 @@ import java.awt.geom.Area;
 
 /**
  * A class to hold geometric transformations of an aperture
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=85">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=85">
  * Section 4.9 of the Gerber Layer Format Specification</a>
  */
 class ApertureTransformation {

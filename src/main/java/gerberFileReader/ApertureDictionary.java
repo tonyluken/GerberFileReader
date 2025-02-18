@@ -23,8 +23,7 @@ import java.util.Map;
 /**
  * A class for storing Gerber apertures so that they may be looked-up by their Id.
  * 
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=22">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=22">
  * Section 2.10 of the Gerber Layer Format Specification</a>
  */
 class ApertureDictionary {

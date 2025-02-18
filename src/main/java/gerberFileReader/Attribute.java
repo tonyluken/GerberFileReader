@@ -37,14 +37,11 @@ public class Attribute {
      * @param cmd - the Gerber command string
      * @throws GerberLayerFormatException if the given command is not a valid TF, TA, or TO command
      * 
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
      * Section 5.2 of the Gerber Specification</a>
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=125">
      * Section 5.3 of the Gerber Specification</a>
-     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
-     * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=126">
+     * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=126">
      * Section 5.4 of the Gerber Specification</a>
      */
     Attribute(String cmd) throws GerberLayerFormatException {

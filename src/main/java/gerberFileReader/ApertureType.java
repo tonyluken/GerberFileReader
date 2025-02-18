@@ -21,11 +21,9 @@ package gerberFileReader;
  * Enumeration of aperture types. Note that per the Gerber spec, STEP_AND_REPEAT is not considered 
  * an aperture but it in included here because we treat it basically the same as a block aperture.
  * 
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=51">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=51">
  * Section 4.4 of the Gerber Layer Format Specification</a>
- * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-
- * specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=57">
+ * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=57">
  * Section 4.5 of the Gerber Layer Format Specification</a>
  */
 enum ApertureType {
