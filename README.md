@@ -13,10 +13,10 @@ For Maven users, simply add the following dependency to your pom:
 	<dependency>
 		<groupId>io.github.tonyluken</groupId>
 		<artifactId>GerberFileReader</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</dependency>
 
-Other users can download a jar file [here](https://repo.maven.apache.org/maven2/io/github/tonyluken/GerberFileReader/1.0.0).
+Other users can download jar files [here](https://repo.maven.apache.org/maven2/io/github/tonyluken/GerberFileReader/1.0.1).
 
 ## License
 GerberFileReader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
