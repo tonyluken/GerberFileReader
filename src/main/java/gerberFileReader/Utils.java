@@ -215,9 +215,9 @@ class Utils {
             double d3 = d2*d;
             double d4 = d2*d2;
             double r2 = r*r;
-            double srt = Math.sqrt(-a4 - 2*a2*b2 - b4 + 4*a*c3 - c4 + 4*b*d3 - d4 - 2*(3*a2 + b2)*c2
+            double srt = Math.sqrt(Math.max(0, -a4 - 2*a2*b2 - b4 + 4*a*c3 - c4 + 4*b*d3 - d4 - 2*(3*a2 + b2)*c2
                     - 2*(a2 + 3*b2 - 2*a*c + c2)*d2 + 4*(a2 + b2 - 2*a*c + c2 - 2*b*d + d2)*r2 
-                    + 4*(a3 + a*b2)*c + 4*(a2*b + b3 - 2*a*b*c + b*c2)*d);
+                    + 4*(a3 + a*b2)*c + 4*(a2*b + b3 - 2*a*b*c + b*c2)*d));
             double denom = a2 + b2 - 2*a*c + c2 - 2*b*d + d2;
             
             //One possible center is given by

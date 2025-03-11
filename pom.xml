@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.tonyluken</groupId>
 	<artifactId>GerberFileReader</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Gerber File Reader</name>
 	<description>Java Class to read and parse Gerber files into a format suitable for processing by a Java program</description>
 	<url>https://github.com/tonyluken/GerberFileReader</url>
