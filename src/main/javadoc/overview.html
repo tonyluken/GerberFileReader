@@ -219,10 +219,64 @@
     }
     </code></pre>
 
+    <p>As an alternative, Gerber Standard Attributes also have their own classes defined so the
+    developer doesn't need to know all the specific details of each particular Standard Attribute.
+    As an example, using the <a href="standardAttributes/Pin.html">Pin</a> and 
+    <a href="standardAttributes/Net.html">Net</a> classes, the same code as above can be written as:
+    </p>
+    
+    <pre><code>
+    for (GraphicalObject go : gs.getStream()) {
+        AttributeDictionary goAttributes = go.getAttributes();
+        Pin pinAttribute = goAttributes.get(new Pin());
+        //Skip the object if it doesn't have a pin attribute
+        if (pinAttribute == null) {
+            continue;
+        }
+        Net netAttribute = goAttributes.get(new Net());
+        //Skip the object if it doesn't have a net attribute, or doesn't have a net name, or is not
+        //connected
+        if (netAttribute == null || netAttribute.isEmpty() || netAttribute.isNotConnected()) {
+            continue;
+        }
+        System.out.println(netAttribute.getValues().get(0) + "," +
+                           pinAttribute.getValues().get(0) + "," +
+                           pinAttribute.getValues().get(1);
+    }
+    </code></pre>
+
     <p>* A complete net-list would require combining the lists from all layers of the design. Since each
 	Gerber file only defines a single layer, an outer enclosing loop would be required to process all
 	of the design's Gerber files to obtain the complete net-list.</p>
 
+    <h2>MD5 Signature</h2>
+    <p>Gerber file writers can optionally add an MD5 signature to the end of the file to make it 
+    easy to detect if the file has be inadvertently modified after it was written. GerberFileReader 
+    calculates the file's actual MD5 signature as it parses the file. After the file has been 
+    parsed, the actual and expected signatures can be compared to detect any changes to the file as 
+    shown in the code snippet shown below:</p>
+    
+    <pre><code>
+    //Attempt to get the .MD5 Standard Attribute from the file attributes
+    FileMD5 expectedMD5 = parser.getFileAttributes().get(new FileMD5());
+                
+    //Attempt to get the file's actual MD5 signature from the parser
+    String actualSignature = parser.getActualMD5Signature();
+                
+    //If we have both, we can compare them to see if the file has been unexpectedly 
+    //altered
+    if (expectedMD5 != null &amp;&amp; actualSignature != null) {
+        System.out.println("Checking MD5 signature...");
+        if (!actualSignature.equals(expectedMD5.getSignature())) {
+            throw new Exception("File may be corrupted, actual MD5 signature (" + 
+                    actualSignature + ") does not match expected (" + 
+                    expectedMD5.getSignature());
+        }
+        System.out.println("MD5 signature Ok!");
+    }
+    </code></pre>
+    
+    
     <h2>MetaData</h2>
     <p>In addition to the attributes required by the Gerber Layer Format Specification, other 
     potentially useful information is attached to each graphical object. This can be obtained by

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"gerberFileReader"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"gerberFileReader"},{"l":"standardAttributes"}]

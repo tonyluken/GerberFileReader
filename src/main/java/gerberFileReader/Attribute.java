@@ -27,10 +27,10 @@ import java.util.List;
  * Section 5 of the Gerber Layer Format Specification</a>
  */
 public class Attribute {
-    private AttributeType type;
-    private String name;
+    protected AttributeType type;
+    protected String name;
     
-    private List<String> values = new ArrayList<>();
+    protected List<String> values = new ArrayList<>();
     
     /**
      * Constructs an attribute from the given Gerber TF, TA, or TO command
@@ -44,7 +44,7 @@ public class Attribute {
      * @see <a href="https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2024-05_en.pdf?94b45d8745c1a068fd091f095a26ddeb#page=126">
      * Section 5.4 of the Gerber Specification</a>
      */
-    Attribute(String cmd) throws GerberLayerFormatException {
+    protected Attribute(String cmd) throws GerberLayerFormatException {
         type = AttributeType.from(cmd);
         cmd = cmd.substring(2);
         int idx = cmd.indexOf(',');
@@ -74,6 +74,9 @@ public class Attribute {
                 cmd = "";
             }
         }
+    }
+
+    public Attribute() {
     }
 
     /**
@@ -118,4 +121,6 @@ public class Attribute {
         }
         return ret + "})";
     }
+    
+
 }

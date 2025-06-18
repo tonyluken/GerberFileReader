@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.tonyluken</groupId>
 	<artifactId>GerberFileReader</artifactId>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 	<name>Gerber File Reader</name>
 	<description>Java Class to read and parse Gerber files into a format suitable for processing by a Java program</description>
 	<url>https://github.com/tonyluken/GerberFileReader</url>
@@ -33,8 +33,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<dependencies>
@@ -93,23 +93,20 @@
                 <artifactId>jreleaser-maven-plugin</artifactId>
                 <configuration>
                     <jreleaser>
-                        <signing>
-                            <active>ALWAYS</active>
-                            <armored>true</armored>
-                        </signing>
+                      <signing>
+                        <active>ALWAYS</active>
+                        <armored>true</armored>
+                      </signing>
                       <deploy>
-                          <maven>
-                              <nexus2>
-                                  <maven-central>
-                                      <active>ALWAYS</active>
-                                      <url>https://s01.oss.sonatype.org/service/local</url>
-                                      <snapshotUrl>https://s01.oss.sonatype.org/content/repositories/snapshots/</snapshotUrl>
-                                      <closeRepository>false</closeRepository>
-                                      <releaseRepository>false</releaseRepository>
-                                      <stagingRepositories>target/staging-deploy</stagingRepositories>
-                                  </maven-central>
-                              </nexus2>
-                          </maven>
+                        <maven>
+                          <mavenCentral>
+                            <sonatype>
+                              <active>ALWAYS</active>
+                              <url>https://central.sonatype.com/api/v1/publisher</url>
+                              <stagingRepositories>target/staging-deploy</stagingRepositories>
+                            </sonatype>
+                          </mavenCentral>
+                        </maven>
                       </deploy>
                     </jreleaser>
                 </configuration>

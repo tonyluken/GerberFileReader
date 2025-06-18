@@ -50,13 +50,15 @@ public class GerberFileReader {
     private AttributeDictionary fileAttributeDictionary;
     private AttributeDictionary attributeDictionary;
     private String lastOp = "";
+    private String computedMD5Signature = null;
+
 
     /**
      * Constructs a GerberFileReader for the specified file. It attempts to open the file and read
      * the file header. When it returns, the file's attributes are available via the {@link 
      * #getFileAttributes()} method and the coordinate units are available via the {@link #getUnits()} 
      * method.
-     * @param file - the file to read
+     * @param file the file to read
      * @throws GerberLayerFormatException if the file can't be opened for reading or is not a valid 
      * Gerber file
      */
@@ -84,13 +86,13 @@ public class GerberFileReader {
     /**
      * Parses the Gerber file on a background thread to generate its graphics stream.
      * 
-     * @param showProgress - (optional, set to null if not used) a call-back routine that gets
+     * @param showProgress (optional, set to null if not used) a call-back routine that gets
      * called periodically on the event dispatch thread to show progress as the file is parsed. The 
      * call-back routine should have one parameter of type double which will vary from 0 to 1 as the
      * file is parsed. Typically used to update a progress bar or percent complete display.
-     * @param runOnSuccess - (optional, set to null if not used) a call-back routine that gets 
+     * @param runOnSuccess (optional, set to null if not used) a call-back routine that gets 
      * called when the file has been successfully parsed
-     * @param runOnFailure - (optional, set to null if not used) a call-back routine that gets 
+     * @param runOnFailure (optional, set to null if not used) a call-back routine that gets 
      * called if parsing of the file has failed for some reason. The call-back routine should have
      * one parameter of type Exception which is used to pass back the exception that caused the 
      * failure.
@@ -149,7 +151,7 @@ public class GerberFileReader {
     
     /**
      * Sets the done flag.
-     * @param done - the state to set the done flag
+     * @param done the state to set the done flag
      */
     protected synchronized void setDone(boolean done) {
         this.done = done;
@@ -165,15 +167,15 @@ public class GerberFileReader {
 
     /**
      * Sets the error flag.
-     * @param error - the state to set the error flag
+     * @param error the state to set the error flag
      */
     protected synchronized void setError(boolean error) {
         this.error = error;
     }
     
     /**
-     * Sets the state of lastError .
-     * @param lastError - the value to set
+     * Sets the state of lastError.
+     * @param lastError the value to set
      */
     protected synchronized void setLastError(Exception lastError) {
         this.lastError = lastError;
@@ -182,6 +184,7 @@ public class GerberFileReader {
     /**
      * Checks to see if the parsing of the Gerber file has failed.
      * @return true if parsing of the Gerber file has failed
+     * @see #getLastError()
      */
     public synchronized boolean isError() {
         return error;
@@ -191,6 +194,7 @@ public class GerberFileReader {
      * Gets the last exception that occurred during the parsing of the Gerber file. The contents of
      * the exception message may be examined to determine the exact cause of the exception.
      * @return the last exception that occurred or null if no exception occurred
+     * @see #isError()
      */
     public synchronized Exception getLastError() {
         return lastError;
@@ -213,11 +217,18 @@ public class GerberFileReader {
     }
 
     /**
-     * Gets the stream of GraphicObjects described by the Gerber file. 
-     * @return the stream of GraphicObjects or an empty stream if the file has not been parsed
+     * Gets the stream of GraphicObjects described by the Gerber file. The file must be successfully 
+     * parsed before the Graphics Stream is available.
+     * @return the stream of GraphicObjects
+     * @throws IllegalStateException if the file has not been successfully parsed
      */
     public GraphicsStream getGraphicsStream() {
-        return graphicsStream;
+        if (isDone()) {
+            return graphicsStream;
+        }
+        else {
+            throw new IllegalStateException("The file must be parsed before the Graphics Stream is available.");
+        }
     }
 
     /**
@@ -227,6 +238,23 @@ public class GerberFileReader {
      */
     public AttributeDictionary getFileAttributes() {
         return fileAttributeDictionary;
+    }
+    
+    /**
+     * Gets the Gerber file's actual MD5 signature. The file must be successfully parsed before the 
+     * signature is available. Note that the actual signature should exactly match the expected MD5 
+     * signature provided with the file's (optional) .MD5 standard attribute.  
+     * @return the MD5 signature as 32 hexadecimal characters or null if a signature could not be 
+     * computed
+     * @throws IllegalStateException if the file has not been successfully parsed
+     */
+    public String getActualMD5Signature() {
+        if (isDone()) {
+            return computedMD5Signature;
+        }
+        else {
+            throw new IllegalStateException("The file must be parsed before the MD5 signature is available.");
+        }
     }
 
     /**
@@ -256,8 +284,8 @@ public class GerberFileReader {
 
     /**
      * Performs the actual work of parsing the Gerber file
-     * @param gerberFile - the gerber file to parse
-     * @param showProgress - (optional, set to null if not used) a call-back routine that gets
+     * @param gerberFile the gerber file to parse
+     * @param showProgress (optional, set to null if not used) a call-back routine that gets
      * called periodically to show progress as the file is parsed. The call-back routine should have
      * one parameter of type double which will vary from 0 to 1 as the file is parsed. Typically 
      * used to update a progress bar or percent complete display.
@@ -310,13 +338,13 @@ public class GerberFileReader {
                     }
                 }
             }
+            computedMD5Signature = tokenizer.getMD5Signature();
             if (!isDone()) {
                 throw new GerberLayerFormatException(
-                        "FILE appears to be truncated (does not end with a M02* command).");
+                        "FilE appears to be truncated (does not end with an M02* command).");
             }
         }
         catch (Exception ex) {
-            ex.printStackTrace();
             setError(true);
             setLastError(ex);
             throw new GerberLayerFormatException("Error in " + gerberFile.getName() + " at " + 
@@ -326,7 +354,7 @@ public class GerberFileReader {
     
     /**
      * Processes the Gerber word commands
-     * @param cmd - the word command to process excluding the terminating '*' character
+     * @param cmd the word command to process excluding the terminating '*' character
      * @throws GerberLayerFormatException if the word command is invalid or unrecognized
      */
     private void processWordCommand(String cmd) throws GerberLayerFormatException {
@@ -364,7 +392,14 @@ public class GerberFileReader {
                         case 3: // G03 - counter-clockwise arc mode
                             graphicState.setPlotState(PlotState.fromCommand(nd));
                             continue;
-                        case 4: // G04 - Comment (ignored)
+                        case 4: // G04 - Comment
+                            if (cmd.contains("#@!")) {
+                                //We have a standard comment so process the content after the "#@!"
+                                //as an extended command
+                                idx = cmd.indexOf("#@!") + 3;
+                                cmd = cmd.substring(idx).stripLeading();
+                                processExtendedCommand(cmd);
+                            }
                             cmd = "";
                             continue;
                         case 36: // G36 - Start new region
@@ -568,7 +603,7 @@ public class GerberFileReader {
 
     /**
      * Processes the Gerber extended commands
-     * @param cmd - the extended command to process excluding its enclosing '%' characters as well
+     * @param cmd the extended command to process excluding its enclosing '%' characters as well
      * as the terminating '*' character
      * @throws GerberLayerFormatException if the extended command is invalid or unsupported
      */
@@ -598,6 +633,9 @@ public class GerberFileReader {
                 
             }
             else {
+                if (currentApertureBlock == null) {
+                    throw new GerberLayerFormatException("Invalid to end an Aperture Block before one is started.");
+                }
                 //Finishing an aperture block
                 currentApertureBlock.close();
                 
@@ -741,7 +779,7 @@ public class GerberFileReader {
     /**
      * Appends the specified GraphicStream either to the end of the current aperture block if one
      * is in progress or to the end of the output image graphics stream
-     * @param graphicsStream - the graphics stream to append
+     * @param graphicsStream the graphics stream to append
      */
     private void addToGraphicsStream(GraphicsStream graphicsStream) {
         if (currentApertureBlock != null) {
@@ -751,4 +789,5 @@ public class GerberFileReader {
             this.graphicsStream.put(graphicsStream);
         }
     }
+    
 }

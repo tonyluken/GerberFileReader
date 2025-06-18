@@ -19,6 +19,9 @@ package gerberFileReader;
 
 import java.util.HashMap;
 
+import standardAttributes.StandardAttribute;
+
+
 /**
  * A class to hold a mapping of attribute names to their corresponding attributes
  * 
@@ -32,7 +35,7 @@ public class AttributeDictionary extends HashMap<String, Attribute>{
      * Returns a new AttributeDictionary that contains all of the attributes of 
      * the specified type that are currently held in this dictionary
      * 
-     * @param type - the type of attributes to get from this dictionary
+     * @param type the type of attributes to get from this dictionary
      * @return the new dictionary
      */
     protected AttributeDictionary getAllOf(AttributeType type) {
@@ -44,6 +47,35 @@ public class AttributeDictionary extends HashMap<String, Attribute>{
             }
         }
         return ret;
+    }
+    
+    /**
+     * Attempts to get an attribute with a specified name from this attribute dictionary.
+     * 
+     * @param attributeName the name of the attribute to retrieve
+     * @return the attribute if it was found in the dictionary, null otherwise
+     */
+    public Attribute get(String attributeName) {
+        return super.get(attributeName);
+    }
+    
+    /**
+     * Attempts to get a Gerber Standard Attribute of a specified type from this attribute 
+     * dictionary.
+     * @param <T> any subclass of {@link StandardAttribute}
+     * @param standardAttribute an instance of the Standard Attribute to get. If the Standard 
+     * Attribute is found in the dictionary, the instance will be initialized using the contents 
+     * from the dictionary.
+     * @return the requested Standard Attribute if it is found in the dictionary, null otherwise.
+     * @throws GerberLayerFormatException if there is a problem initializing the Standard Attribute
+     */
+    public <T extends StandardAttribute> T get(T standardAttribute) throws GerberLayerFormatException {
+        Attribute attribute = get(standardAttribute.getGerberStandardAttributeName());
+        if (attribute == null) {
+            return null;
+        }
+        standardAttribute.initialize(attribute);
+        return standardAttribute;
     }
     
 }

@@ -20,6 +20,10 @@ package gerberFileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * A class for tokenizing Gerber files into Gerber commands
@@ -34,12 +38,15 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
     private boolean tokenStarting = true;
     private Reader reader;
     private int lastChar = '*';
+    private String md5String = "";
+    private boolean md5InProgress = true;
+    private MessageDigest messageDigest;
     private boolean attributeValue = false;
 
     /**
      * Constructs a tokenizer for Gerber files
      * 
-     * @param reader - the reader of the Gerber file
+     * @param reader the reader of the Gerber file
      */
     public GerberTokenizer(Reader reader) {
         super(reader);
@@ -53,6 +60,14 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
         ordinaryChar('\n');
         lowerCaseMode(false);
         eolIsSignificant(false);
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+        }
+        catch (NoSuchAlgorithmException e) {
+            // This really should never happen but we catch it here just in case
+            e.printStackTrace();
+        }
+        md5InProgress = messageDigest != null;
     }
 
     /**
@@ -61,9 +76,10 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
      * @return either StreamTokenizer.TT_EOF if the end of the file has been reached, the character
      *         value of '%' if a percent character was found, or StreamTokenizer.TT_WORD if a Gerber
      *         command was found. In the case of a Gerber command, sval is set to the Gerber command
-     *         excluding its terminating '*' character. Note, any leading and trailing white space
-     *         (including carriage returns and/or line feeds) are stripped from each line of the
-     *         file as it is tokenized unless they are part of an attribute value.
+     *         excluding its terminating '*' character. Note, carriage returns and line feeds are 
+     *         stripped from each line as it is tokenized. In addition, any leading and trailing 
+     *         white spaces are stripped from each line unless the spaces are part of an attribute 
+     *         value.
      */
     @Override
     public int nextToken() throws IOException {
@@ -76,6 +92,7 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                         tokenStarting = false;
                     }
                     bytesProcessed += sval.length();
+                    md5String += sval;
                     // Keep appending to the token until we hit an '*'
                     if (!attributeValue) {
                         sval = sval.trim();
@@ -91,8 +108,39 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                     sval = unescape(token);
                     ttype = TT_WORD;
                     bytesProcessed += 1;
+                    md5String += "*";
                     tokenStarting = true; // reset for the next token
                     lastChar = '*';
+                    if (md5InProgress) {
+                        //When computing the file's MD5 signature, we want to skip everything after 
+                        //a %TF.MD5,...*% extended command or a closing M02* command (whichever
+                        //comes first
+                        if (md5String.contains("TF.MD5")) {
+                            int idx1 = md5String.indexOf("G04");
+                            int idx2 = md5String.indexOf("#@!");
+                            int idx3 = md5String.indexOf("TF.MD5");
+                            int idx4 = md5String.indexOf("%TF.MD5");
+                            if (idx4 >= 0) {
+                                //We have a TF extended command for a .MD5 Standard Attribute so
+                                md5String = md5String.substring(0, idx4);
+                                md5InProgress = false;
+                            }
+                            else if (idx1 >= 0 && idx2 > idx1 && idx3 > idx2) {
+                                //We have a standard comment for a .MD5 Standard Attribute
+                                md5String = md5String.substring(0, idx1);
+                                md5InProgress = false;
+                            }
+                        }
+                        else if (md5String.contains("M02*") || md5String.contains("M2*") || 
+                                md5String.contains("M00*") || md5String.contains("M0*")) {
+                            //We're at the end of the file
+                            int idx = md5String.lastIndexOf("M");
+                            md5String = md5String.substring(0, idx);
+                            md5InProgress = false;
+                        }
+                        messageDigest.update(md5String.getBytes(StandardCharsets.UTF_8));
+                        md5String = "";
+                    }
                     attributeValue = false;
                     return ttype;
                 case '%':
@@ -100,6 +148,7 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                     // when a Gerber extended command has started/ended
                     firstLineno = lineCount;
                     bytesProcessed += 1;
+                    md5String += "%";
                     if (lastChar != '*') {
                         // We should throw an exception here since we can't have a % without a
                         // preceding *. However, since the interface for nextToken doesn't allow for
@@ -111,31 +160,28 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                 case ',':
                     if (token.startsWith("TF") || token.startsWith("TA")
                             || token.startsWith("TO")) {
-                        // Attribute values are more lenient as to what characters they can contain
-                        // so we set a flag here so we keep carriage returns, line feeds, trailing
-                        // and leading spaces as part of the value
+                        // Attribute values are more lenient as they can contain leading and 
+                        // trailing spaces as part of the value. So, here we set a flag to ensure we
+                        // don't trim them away when processing an attribute value.
                         attributeValue = true;
                     }
+                    bytesProcessed += 1;
+                    md5String += ",";
                     token += (char) ttype;
                     lastChar = ',';
                     break;
                 case '\r':
                 case '\n':
-                    // Carriage returns and line feeds don't have much significance to the Gerber
-                    // file syntax other than if they occur within an attribute's value. Here we
-                    // keep track of them so we can count line numbers. This is mainly for error
-                    // reporting purposes if something goes wrong during the parsing process.
+                    // Carriage returns and line feeds don't have any significance to the Gerber
+                    // file syntax. Here we keep track of them so we can count line numbers. This is
+                    // mainly for error reporting purposes if something goes wrong during the 
+                    // parsing process.
                     if (starting) {
                         eol = ttype;
                         starting = false;
                     }
                     if (ttype == eol) {
                         lineCount++;
-                    }
-                    // The only significant carriage returns and line feeds are those that occur
-                    // within attribute values so we add them to the token here
-                    if (attributeValue) {
-                        token += (char) ttype;
                     }
                     bytesProcessed += 1;
                     break;
@@ -144,12 +190,17 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                     System.out.println("At line " + lineCount + ", found unknown character value "
                             + super.ttype);
             }
-        } ;
+        }
         if (ttype == TT_EOF && token.length() > 0) {
             // This shouldn't happen unless the file doesn't have a proper ending M02* command
             sval = unescape(token);
             ttype = TT_WORD;
             tokenStarting = true; // reset for the next token
+            if (md5InProgress) {
+                messageDigest.update(md5String.getBytes(StandardCharsets.UTF_8));
+                md5String = "";
+                md5InProgress = false;
+            }
             return ttype;
         }
         return ttype;
@@ -159,23 +210,23 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
      * Scans a string for unicode escape sequences and replaces them with their equivalent unicode
      * characters
      * 
-     * @param s - a string with possible unicode escape sequences embedded within it
+     * @param string a string with possible unicode escape sequences embedded within it
      * @return a copy of the string with all unicode escape sequences replaced by their unicode
      *         characters
      */
-    private static String unescape(String s) {
+    private static String unescape(String string) {
         int i = 0;
         char c;
-        int len = s.length();
+        int len = string.length();
         StringBuffer sb = new StringBuffer(len);
         while (i < len) {
-            c = s.charAt(i++);
+            c = string.charAt(i++);
             if (c == '\\') {
                 if (i < len) {
-                    c = s.charAt(i++);
+                    c = string.charAt(i++);
                     if (c == 'u') {
                         try {
-                            c = (char) Integer.parseInt(s.substring(i, i + 4), 16);
+                            c = (char) Integer.parseInt(string.substring(i, i + 4), 16);
                             i += 4;
                         }
                         catch (NumberFormatException e) {
@@ -186,7 +237,7 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
                     }
                     else if (c == 'U') {
                         try {
-                            c = (char) Integer.parseInt(s.substring(i, i + 8), 16);
+                            c = (char) Integer.parseInt(string.substring(i, i + 8), 16);
                             i += 8;
                         }
                         catch (NumberFormatException e) {
@@ -207,24 +258,27 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
     }
 
     /**
+     * Gets the number of file bytes processed so far.
      * 
-     * @return the number of file bytes processed so far
+     * @return the number of bytes
      */
     public long getBytesProcessed() {
         return bytesProcessed;
     }
 
     /**
-     * Gets the file line number where the current token began
+     * Gets the file line number where the current token began.
      * 
-     * @return the first line number
+     * @return the line number
      */
     public int getFirstLineno() {
         return firstLineno;
     }
 
     /**
-     * Gets the file line number where the current token ended
+     * Gets the file line number where the current token ended.
+     * 
+     * @return the line number
      */
     @Override
     public int lineno() {
@@ -232,8 +286,9 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
     }
 
     /**
+     * Gets a string description of which file line(s) correspond to the current token.
      * 
-     * @return a string description of which file line(s) the current token came from
+     * @return the description
      */
     public String getLineInfo() {
         if (firstLineno < lineCount) {
@@ -241,6 +296,22 @@ class GerberTokenizer extends StreamTokenizer implements AutoCloseable {
         }
         else {
             return "line " + lineCount;
+        }
+    }
+    
+    /**
+     * Gets the MD5 signature computed over all characters excluding carriage returns and line feeds
+     * and ending with the last character before a "%TF.MD5,...*%" or "M02* command, whichever comes 
+     * first.
+     * 
+     * @return the MD5 signature as 32 hexadecimal characters 
+     */
+    public String getMD5Signature() {
+        if (messageDigest != null) {
+            return String.format("%032x", new BigInteger(1, messageDigest.digest()));
+        }
+        else {
+            return null;
         }
     }
 

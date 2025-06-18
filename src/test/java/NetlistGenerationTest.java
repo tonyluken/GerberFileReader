@@ -28,10 +28,11 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import gerberFileReader.Attribute;
 import gerberFileReader.AttributeDictionary;
 import gerberFileReader.GerberFileReader;
 import gerberFileReader.GraphicalObject;
+import standardAttributes.Net;
+import standardAttributes.Pin;
 
 public class NetlistGenerationTest {
 
@@ -87,23 +88,22 @@ public class NetlistGenerationTest {
         List<String> gerberNetList = new ArrayList<>();
         goLoop: for (GraphicalObject go : parser.getGraphicsStream().getStream()) {
             AttributeDictionary goAttributes = go.getAttributes();
-            Attribute pinAttribute = goAttributes.get(".P");
+            Pin pinAttribute = goAttributes.get(new Pin());
             if (pinAttribute == null) {
                 continue;
             }
-            Attribute netAttribute = goAttributes.get(".N");
-            if (netAttribute == null || netAttribute.getValues().size() == 0 ||
-                    netAttribute.getValues().get(0).equals("N/C")) {
+            Net netAttribute = goAttributes.get(new Net());
+            if (netAttribute == null || netAttribute.isEmpty() || netAttribute.isNotConnected()) {
                 continue;
             }
             
             //Extract the net name
-            String netName = netAttribute.getValues().get(0);
+            String netName = netAttribute.getNetName();
             
-            //Build a net terminal as a string "<net name>,<ref des>,<pin>"
+            //Build a net terminal as a string "<net name>,<ref des>,<pin #>"
             String netTerminal = netName + "," +
-                    pinAttribute.getValues().get(0) + "," +
-                    pinAttribute.getValues().get(1);
+                    pinAttribute.getReferenceDesignator() + "," +
+                    pinAttribute.getNumber();
 
             //Skip any duplicates
             for (String existingNetTerminal : gerberNetList) {

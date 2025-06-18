@@ -6,6 +6,11 @@ GerberFileReader is intended to be fully compliant with Ucamco's [Gerber Layer F
 
 Note: GerberFileReader is not intended to be a complete Gerber syntax checker. While it will catch many such errors, it is not guaranteed to catch every possible one. If you have doubts of the validity of a Gerber file, run it through Ucamco's online [Reference Gerber Viewer](https://gerber-viewer.ucamco.com/) as it has a complete syntax checker built-in.
 
+## Latest changes
+- Previously, GerberFileReader ignored all G04 comment content. It now correctly processes Standard Comments used to define attributes, see the Gerber Layer Format Specification Revision 2024.05, section [5.1.1 Comment attributes](https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2022-02_en.pdf?ac97011bf6bce9aaf0b1aac43d84b05f#page=124)
+- Standard attributes now have their own classes defined in the [standardAttributes](src/main/java/standardAttributes) package so developers no longer need to understand their detailed Gerber syntax in order to process their content, see the Gerber Layer Format Specification Revision 2024.05, section [5.6 Standard Attributes](https://www.ucamco.com/files/downloads/file_en/456/gerber-layer-format-specification-revision-2022-02_en.pdf?ac97011bf6bce9aaf0b1aac43d84b05f#page=128). The unit tests have been updated to take advantage of this and they also provide a good example of how to use these new classes. 
+- GerberFileReader now generates an MD5 signature as the Gerber file is parsed. Once parsing of the file has successfully completed, the signature can be obtained by calling the getActualMD5Signature() method. This can be compared to the expected MD5 signature (obtained from the optional FileMD5 Standard Attribute) to guard against inadvertent file modifications.
+
 ## How to get GerberFileReader
 
 For Maven users, simply add the following dependency to your pom:
@@ -13,10 +18,10 @@ For Maven users, simply add the following dependency to your pom:
 	<dependency>
 		<groupId>io.github.tonyluken</groupId>
 		<artifactId>GerberFileReader</artifactId>
-		<version>1.0.1</version>
+		<version>1.1.0</version>
 	</dependency>
 
-Other users can download jar files [here](https://repo.maven.apache.org/maven2/io/github/tonyluken/GerberFileReader/1.0.1).
+Other users can download jar files [here](https://repo.maven.apache.org/maven2/io/github/tonyluken/GerberFileReader/1.1.0).
 
 ## License
 GerberFileReader is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

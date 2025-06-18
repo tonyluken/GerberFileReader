@@ -34,7 +34,7 @@ class Region {
     private Path2D path = new Path2D.Double();
     private AttributeDictionary attributes;
     
-    /*
+    /**
      * Constructs an empty region with all APERTURE Attributes in the given AttributeDictionary
      * attached to it.
      */

@@ -30,6 +30,13 @@ import org.junit.jupiter.api.Test;
 import gerberFileReader.AttributeDictionary;
 import gerberFileReader.GerberFileReader;
 import gerberFileReader.GraphicalObject;
+import standardAttributes.ApertureFunction;
+import standardAttributes.ComponentFootprint;
+import standardAttributes.ComponentReferenceDesignator;
+import standardAttributes.ComponentRotation;
+import standardAttributes.ComponentValue;
+import standardAttributes.FileFunction;
+import standardAttributes.FileFunction.BoardSide;
 
 public class PnpDataGenerationTest {
     Exception savedError;
@@ -91,41 +98,44 @@ public class PnpDataGenerationTest {
             GerberFileReader parser = new GerberFileReader(gerberFile);
             parser.parseFile();
             
-//            if (parser.isError()) {
-//                throw new Exception(savedError.getMessage());
-//            }
-            
             AttributeDictionary fileAttributes = parser.getFileAttributes();
-            if (!fileAttributes.get(".FileFunction").getValues().get(0).equals("Component")) {
+            FileFunction fileFunction = fileAttributes.get(new FileFunction());
+            if (fileFunction == null || !fileFunction.isComponent()) {
                 continue;
             }
-            String side = fileAttributes.get(".FileFunction").getValues().get(2).toLowerCase();
+
+            BoardSide side = fileFunction.getComponentSide();
             for (GraphicalObject go : parser.getGraphicsStream().getStream()) {
                 AttributeDictionary goAttributes = go.getAttributes();
-                if (!goAttributes.get(".AperFunction").getValues().get(0).equals("ComponentMain")) {
+                ApertureFunction apertureFunction = goAttributes.get(new ApertureFunction());
+                if (apertureFunction == null || !apertureFunction.isComponentMain()) {
                     continue;
                 }
                 Rectangle2D bounds = go.getArea().getBounds2D();
+                double xCoord = bounds.getCenterX();
+                double yCoord = bounds.getCenterY();
                 
                 //When KiCad exports to the .pos file, it replaces space characters with
                 //underscores. However, when it exports to Gerber files, it keeps the spaces and
                 //encloses the string in double quotes. So here we remove the quotes and change all
                 //spaces to underscores.
-                String refDes = goAttributes.get(".C").getValues().get(0).replaceAll("[\"]", "").replaceAll("[ ]", "_");
-                String value = goAttributes.get(".CVal").getValues().get(0).replaceAll("[\"]", "").replaceAll("[ ]", "_");
-                String pkg = goAttributes.get(".CFtp").getValues().get(0).replaceAll("[\"]", "").replaceAll("[ ]", "_");
+                String refDes = goAttributes.get(new ComponentReferenceDesignator())
+                        .getReferenceDesignator().replaceAll("[\"]", "").replaceAll("[ ]", "_");
+                String value = goAttributes.get(new ComponentValue())
+                        .getValue().replaceAll("[\"]", "").replaceAll("[ ]", "_");
+                String pkg = goAttributes.get(new ComponentFootprint())
+                        .getFootprintName().replaceAll("[\"]", "").replaceAll("[ ]", "_");
                 
-                double xCoord = bounds.getCenterX();
-                double yCoord = bounds.getCenterY();
-                double rot = Double.parseDouble(goAttributes.get(".CRot").getValues().get(0));
+                double rot = goAttributes.get(new ComponentRotation()).getRotation();
                 
                 //Gerber bottom side rotation angles are defined 180 degrees differently than KiCad's
-                if (side.equals("bot")) {
+                if (side == BoardSide.Bottom) {
                     rot += 180;
                 }
                 rot = normalizeAngle(rot);
                 
-                String item = String.format("%s,%s,%s,%.4f,%.4f,%.4f,%s", refDes, value, pkg, xCoord, yCoord, rot, side);
+                String item = String.format("%s,%s,%s,%.4f,%.4f,%.4f,%s", refDes, value, pkg, 
+                        xCoord, yCoord, rot, side == BoardSide.Top ? "top" : "bot");
                 
                 if (ret.contains(item)) {
                     continue;

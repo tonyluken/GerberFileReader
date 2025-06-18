@@ -35,6 +35,7 @@ import gerberFileReader.GerberFileReader;
 import gerberFileReader.GraphicalObject;
 import gerberFileReader.GraphicsStream;
 import gerberFileReader.Polarity;
+import standardAttributes.FileMD5;
 
 public class ImageGenerationTest {
     static {
@@ -102,6 +103,24 @@ public class ImageGenerationTest {
                 if (parser.isError()) {
                     savedError.printStackTrace();
                     throw new Exception(savedError.getMessage());
+                }
+                
+                //Attempt to get the .MD5 Standard Attribute from the file attributes
+                FileMD5 expectedMD5 = parser.getFileAttributes().get(new FileMD5());
+                
+                //Attempt to get the file's actual MD5 signature from the parser
+                String actualSignature = parser.getActualMD5Signature();
+                
+                //If we have both, we can compare them to see if the file has been unexpectedly 
+                //altered
+                if (expectedMD5 != null && actualSignature != null) {
+                    System.out.println("Checking MD5 signature...");
+                    if (!actualSignature.equals(expectedMD5.getSignature())) {
+                        throw new Exception("File may be corrupted, actual MD5 signature (" + 
+                                actualSignature + ") does not match expected (" + 
+                                expectedMD5.getSignature());
+                    }
+                    System.out.println("MD5 signature Ok!");
                 }
                 
                 //Render an image based on the results of parsing the Gerber file
