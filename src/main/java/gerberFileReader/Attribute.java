@@ -55,24 +55,14 @@ public class Attribute {
         if (name.equals("")) {
             throw new GerberLayerFormatException("Attribute must have a valid name.");
         }
-        if (idx < cmd.length()) {
-            cmd = cmd.substring(idx+1);
-        }
-        else {
-            cmd = "";
-        }
-        while (cmd.length() > 0) {
-            idx = cmd.indexOf(',');
+        cmd = cmd.substring(idx);
+        while (cmd.startsWith(",")) {
+            idx = cmd.indexOf(',', 1);
             if (idx < 0) {
                 idx = cmd.length();
             }
-            values.add(cmd.substring(0, idx));
-            if (idx < cmd.length()) {
-                cmd = cmd.substring(idx+1);
-            }
-            else {
-                cmd = "";
-            }
+            values.add(cmd.substring(1, idx));
+            cmd = cmd.substring(idx);
         }
     }
 

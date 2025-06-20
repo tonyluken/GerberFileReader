@@ -61,18 +61,12 @@ public class Pin extends StandardAttribute {
     
     /**
      * Gets the pin number of the component associated with the object to which this 
-     * attribute is attached. Note that the Gerber Layer Format Specification always requires a pin
-     * number but some ECAD programs (KiCad) don't always write a pin number when one isn't defined
-     * for a footprint (many of the predefined fiducials). So here we'll just return an empty string 
-     * if a pin number is not specified.
+     * attribute is attached.
      * 
      * @return the pin number
      */
     public String getNumber() {
-        if (getValues().size() > 1) {
-            return getValues().get(1);
-        }
-        return "";
+        return getValues().get(1);
     }
     
     /**
@@ -95,9 +89,6 @@ public class Pin extends StandardAttribute {
 
     @Override
     public void validate() throws GerberLayerFormatException {
-        //The Gerber spec says there should be 2 or 3 values but KiCad doesn't write a placeholder 
-        //for a pin number if a pin number is not defined on a footprint's pad, e.g., fiducials. So 
-        //for now we won't throw an exception if the pin number is not specified.
-        verifyValueCount(1, 3);
+        verifyValueCount(2, 3);
     }
 }
