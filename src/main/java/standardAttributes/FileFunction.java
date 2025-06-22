@@ -824,7 +824,7 @@ public class FileFunction extends StandardAttribute {
         if (!isPaste()) {
             throw new UnsupportedOperationException("Method getPasteSide() is not available for " + toString());
         }
-        return BoardSide.valueOf(getValues().get(1));
+        return BoardSide.fromAttributeValue(getValues().get(1));
     }
     
     /**
@@ -878,7 +878,7 @@ public class FileFunction extends StandardAttribute {
         if (!isGlue()) {
             throw new UnsupportedOperationException("Method getGlueSide() is not available for " + toString());
         }
-        return BoardSide.valueOf(getValues().get(1));
+        return BoardSide.fromAttributeValue(getValues().get(1));
     }
     
     /**
