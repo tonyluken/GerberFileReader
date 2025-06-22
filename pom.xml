@@ -4,7 +4,14 @@
 	<artifactId>GerberFileReader</artifactId>
 	<version>1.1.0</version>
 	<name>Gerber File Reader</name>
-	<description>Java Class to read and parse Gerber files into a format suitable for processing by a Java program</description>
+	<description>GerberFileReader is a collection of Java Classes to read and parse Gerber files 
+	into a format suitable for additional processing. It does not generate plots per se, but creates 
+	a list of graphical objects based on Java's Shape geometry along with meta-data that can be used 
+	to easily create plots and/or extract various information from the Gerber file. It is intended 
+	to be fully compliant with the Gerber Layer Format Specification, Revision 2024.05. In addition, 
+	it supports many deprecated Gerber commands so it should be able to read many older Gerber files 
+	as well.
+	</description>
 	<url>https://github.com/tonyluken/GerberFileReader</url>
 	<inceptionYear>2023</inceptionYear>
 	<licenses>
